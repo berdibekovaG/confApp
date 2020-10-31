@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_helloScreen_bg"
+            android:src="@drawable/ic_helloscreen_bg"
             android:scaleType="centerCrop"
             android:layout_marginTop="16dp"/>
 
@@ -27,7 +27,7 @@
       android:layout_height="match_parent"
       android:gravity="center"
       android:orientation="vertical"
-      android:background="@drawable/ic_helloScreen_bg">
+      android:background="@drawable/ic_helloscreen_bg">
 
       <ImageView
           android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
       <ImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:src="@drawable/ic_helloScreen_corona2_2"
+          android:src="@drawable/ic_helloscreen_corona2_2"
           android:layout_gravity="bottom|center"
     />
 </LinearLayout>
