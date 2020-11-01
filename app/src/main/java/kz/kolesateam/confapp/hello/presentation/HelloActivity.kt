@@ -1,63 +1,49 @@
 package kz.kolesateam.confapp.hello.presentation
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
+import android.media.MediaCodec.MetricsConstants.MODE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.app.ActionBar
+import kz.kolesateam.confapp.APPLICATION_SHARED_PREFERENCES
+import kz.kolesateam.confapp.MainActivity
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.USER_NAME_KEY
 
 private const val TAG = "HelloActivity"
 
 class HelloActivity : AppCompatActivity() {
 
-    private val closeHelloButton: Button by lazy {
-        findViewById(R.id.activity_hello_close_hello_button)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hello)
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide()
 
-        closeHelloButton.setOnClickListener {
+
+        val helloContinueButton: Button = findViewById(R.id.continue_button)
+        val helloYourNameTextView: TextView = findViewById(R.id.hello_some_user_TextView)
+        val user: String = getSavedUser()
+        helloYourNameTextView.text = resources.getString(R.string.hello_some_user_fmt, user)
+
+        helloContinueButton.setOnClickListener {
             finish()
         }
-
-        Log.d(TAG, "onCreate")
     }
 
-    override fun onRestart() {
-        super.onRestart()
 
-        Log.d(TAG, "onRestart")
-    }
 
-    override fun onStart() {
-        super.onStart()
+    private fun getSavedUser(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(APPLICATION_SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
-        Log.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        Log.d(TAG, "onResume")
-    }
-
-    override fun onPause() {
-        Log.d(TAG, "onPause")
-
-        super.onPause()
-    }
-
-    override fun onStop() {
-        Log.d(TAG, "onStop")
-
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
-
-        super.onDestroy()
+        return sharedPreferences.getString(USER_NAME_KEY, null) ?: "World"
     }
 }

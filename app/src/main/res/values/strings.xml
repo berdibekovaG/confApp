@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ConfApp</string>
+    <string name="Whats_your_name">Как тебя зовут?</string>
+    <string name="hello_some_user_fmt">Привет, %1s</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="on_previous_activity">Назад</string>
+    <string name="hide_enter_your_name">Введи имя</string>
+
 </resources>
