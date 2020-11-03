@@ -37,7 +37,6 @@
                 android:src="@drawable/corona2_1"
                 android:layout_gravity="center" />
 
-
         </LinearLayout>
 
     </FrameLayout>
@@ -68,7 +67,6 @@
         android:layout_gravity="center"
         android:id="@+id/continue_button"
         />
-
 
 </LinearLayout>
 
