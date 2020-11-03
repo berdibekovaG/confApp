@@ -20,14 +20,11 @@ private const val TAG = "HelloActivity"
 
 class HelloActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hello)
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide()
-
 
         val helloContinueButton: Button = findViewById(R.id.continue_button)
         val helloYourNameTextView: TextView = findViewById(R.id.hello_some_user_TextView)
@@ -38,8 +35,6 @@ class HelloActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
 
     private fun getSavedUser(): String {
         val sharedPreferences: SharedPreferences = getSharedPreferences(APPLICATION_SHARED_PREFERENCES, Context.MODE_PRIVATE)

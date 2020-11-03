@@ -47,17 +47,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToHelloScreen() {
-        val helloScreenIntent = Intent(this, HelloActivity::class.java)
-        startActivity(helloScreenIntent)
-    }
-
     private fun saveUser(userName: String) {
         val sharedPreferences: SharedPreferences = getSharedPreferences(APPLICATION_SHARED_PREFERENCES, Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
         editor.putString(USER_NAME_KEY, userName)
         editor.apply()
+    }
+
+    private fun navigateToHelloScreen() {
+        val helloScreenIntent = Intent(this, HelloActivity::class.java)
+        startActivity(helloScreenIntent)
     }
 
 }
