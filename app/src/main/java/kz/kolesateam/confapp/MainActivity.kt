@@ -24,10 +24,8 @@ class MainActivity : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide()
 
-
         val mainContinueButton: Button = findViewById(R.id.continue_button)
         val mainYourNameTextView: EditText = findViewById(R.id.enter_your_name_textView)
-
 
         mainYourNameTextView.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
