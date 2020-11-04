@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import kz.kolesateam.confapp.hello.presentation.TestHelloActivity
+import kz.kolesateam.confapp.presentation.common.AbstractTextWatcher
 
 const val USER_NAME_KEY = "user_name"
 const val APPLICATION_SHARED_PREFERENCES = "application"
@@ -27,19 +28,13 @@ class HelloActivity : AppCompatActivity() {
         val mainContinueButton: Button = findViewById(R.id.continue_button)
         val mainYourNameTextView: EditText = findViewById(R.id.enter_your_name_textView)
 
-        mainYourNameTextView.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                mainContinueButton.isEnabled = s.toString().isNotBlank()
-            }
+        mainYourNameTextView.addTextChangedListener(
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                AbstractTextWatcher { text ->
+                    mainContinueButton.isEnabled = text.isNotBlank()
+                }
 
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-        })
+        )
 
         mainContinueButton.setOnClickListener {
             saveUser(mainYourNameTextView.text.toString())
