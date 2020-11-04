@@ -4,11 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.TextView
 import kz.kolesateam.confapp.R
 
-
+        const val DEFAULT_USER_NAME = "пользователь"
 class TestHelloActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,10 +17,9 @@ class TestHelloActivity : AppCompatActivity() {
                 Context.MODE_PRIVATE
         )
 
-        val textInput: TextView  = findViewById(R.id.textView)
-       val userName = sharedPreferences.getString(USER_NAME_KEY, "пользователь")
-        println(userName)
-   textInput.text= resources.getString(R.string.hello_user_fmt, userName)
+        val helloTextView: TextView  = findViewById(R.id.textview_test_hello)
+        val userName = sharedPreferences.getString(USER_NAME_KEY, DEFAULT_USER_NAME)
+        helloTextView.text= resources.getString(R.string.hello_user_fmt, userName)
     }
 
 

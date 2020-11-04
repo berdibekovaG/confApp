@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_height="@dimen/framel_height_165dp"
         android:background="@color/black">
 
         <ImageView
@@ -21,7 +20,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_helloscreen_bg"
             android:scaleType="centerCrop"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="@dimen/margin_size_16dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_logo_white"
                 android:layout_gravity="top|center"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="@dimen/margin_size_14dp"
                 />
 
 
@@ -52,23 +51,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/what_is_name"
-        android:textSize="24sp"
-        android:textColor="#1C1819"
+        android:textSize="@dimen/acthello_texview_testsize_24sp"
+        android:textColor="@color/grey_activity_hello_textview_textcolor"
         android:textStyle="bold"
-        android:padding="10dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"/>
+        android:padding="@dimen/text_padding_10dp"
+        android:layout_marginHorizontal="@dimen/margin_size_16dp"
+        android:layout_marginBottom="@dimen/margin_size_8dp"
+        android:layout_marginTop="@dimen/margin_size_16dp"/>
 
     <EditText
         android:id="@+id/activity_main_name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="@dimen/margin_size_16dp"
+        android:layout_marginVertical="@dimen/margin_size_8dp"
         android:inputType="text"
-        android:padding="10dp"
-        android:background="@drawable/bg_inputname"
+        android:padding="@dimen/text_padding_10dp"
+        android:background="@drawable/bg_field_for_input_name"
         android:hint="@string/enter_your_name"/>
 
     <Button
@@ -76,13 +75,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="16sp"
-        android:textColor="@drawable/text_color"
+        android:textSize="@dimen/btn_textsize_16sp"
+        android:textColor="@drawable/continue_button_text_color"
         android:textAllCaps="false"
-        android:padding="10dp"
+        android:padding="@dimen/text_padding_10dp"
         android:text="@string/continue_btn"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="@dimen/margin_size_16dp"
+        android:layout_marginVertical="@dimen/margin_size_8dp"
         android:background="@drawable/bg_button"
         android:enabled="false"
         />

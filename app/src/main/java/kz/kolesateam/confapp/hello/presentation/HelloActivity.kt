@@ -29,29 +29,35 @@ class HelloActivity: AppCompatActivity() {
 
         )
 
-   val editText: EditText = findViewById(R.id.activity_main_name_edit_text)
 
-    editText.addTextChangedListener{ text ->
-        findViewById<Button>(R.id.activity_main_open_hallo_button).isEnabled = !text.isNullOrEmpty()
-   }
-//
-////        val userName: String = getSavedUserName()
-////
-//    }
+        val nameEditText: EditText = findViewById(R.id.activity_main_name_edit_text)
+        val findHalloButton = findViewById<Button>(R.id.activity_main_open_hallo_button)
 
-  //  private fun getSavedUserName(): String{
+        nameEditText.addTextChangedListener { text ->
+            if (text != null) {
+                findHalloButton.isEnabled = text.isNotBlank()
+            }
+        }
 
-        findViewById<Button>(R.id.activity_main_open_hallo_button).setOnClickListener {
-           if (!editText.text.isNullOrEmpty()) {
-               val editor = sharedPreferences.edit()
-               editor.putString(USER_NAME_KEY, editText.text.toString())
-               editor.apply()
-               val intent = Intent(this, TestHelloActivity::class.java)
-               startActivity(intent)}
+        fun addingUserName() {
+            val editor = sharedPreferences.edit()
+            editor.putString(USER_NAME_KEY, nameEditText.text.toString())
+            editor.apply()
+        }
 
+        fun startingTestActivity() {
+            val intent = Intent(this, TestHelloActivity::class.java)
+            startActivity(intent)
         }
 
 
-      // return sharedPreferences.getString(USER_NAME_KEY, "Мир") ?: "Мир"
+
+        findHalloButton.setOnClickListener {
+            if (nameEditText.text.isNotBlank()) {
+                addingUserName()
+                startingTestActivity()
+
+            }
+        }
     }
 }

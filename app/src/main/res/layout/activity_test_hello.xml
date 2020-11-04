@@ -8,10 +8,10 @@
     >
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textview_test_hello"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="@dimen/acthello_texview_testsize_24sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:gravity="center_horizontal"

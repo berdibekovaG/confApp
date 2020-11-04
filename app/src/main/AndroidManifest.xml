@@ -12,13 +12,13 @@
         >
 
         <activity android:name=".hello.presentation.TestHelloActivity"></activity>
-        <activity android:name=".hello.MainActivity">
+        <activity android:name=".hello.presentation.HelloActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
-        <activity android:name=".hello.presentation.HelloActivity" />
     </application>
+
 
 </manifest>
