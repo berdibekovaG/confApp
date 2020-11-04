@@ -10,17 +10,17 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import kz.kolesateam.confapp.hello.presentation.HelloActivity
+import kz.kolesateam.confapp.hello.presentation.TestHelloActivity
 
 const val USER_NAME_KEY = "user_name"
 const val APPLICATION_SHARED_PREFERENCES = "application"
-private const val TAG = "MainActivity"
+private const val TAG = "TestHelloActivity"
 
-class MainActivity : AppCompatActivity() {
+class HelloActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_hello)
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide()
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToHelloScreen() {
-        val helloScreenIntent = Intent(this, HelloActivity::class.java)
+        val helloScreenIntent = Intent(this, TestHelloActivity::class.java)
         startActivity(helloScreenIntent)
     }
 

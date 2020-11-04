@@ -1,28 +1,23 @@
 package kz.kolesateam.confapp.hello.presentation
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.media.MediaCodec.MetricsConstants.MODE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import kz.kolesateam.confapp.APPLICATION_SHARED_PREFERENCES
-import kz.kolesateam.confapp.MainActivity
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.USER_NAME_KEY
 
-private const val TAG = "HelloActivity"
+private const val TAG = "TestHelloActivity"
 
-class HelloActivity : AppCompatActivity() {
+class TestHelloActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hello)
+        setContentView(R.layout.activity_hello_test)
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide()
 
