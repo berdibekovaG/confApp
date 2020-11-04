@@ -18,8 +18,6 @@ class TestHelloActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hello_test)
-        val actionBar: ActionBar? = supportActionBar
-        actionBar?.hide()
 
         val helloContinueButton: Button = findViewById(R.id.continue_button)
         val helloYourNameTextView: TextView = findViewById(R.id.hello_some_user_TextView)
