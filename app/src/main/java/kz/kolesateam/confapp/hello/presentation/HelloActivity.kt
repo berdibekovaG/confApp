@@ -5,10 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import kz.kolesateam.confapp.R
 
@@ -23,12 +21,11 @@ class HelloActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hello)
+
         val sharedPreferences: SharedPreferences = getSharedPreferences(
                 APPLICATION_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE
-
         )
-
 
         val nameEditText: EditText = findViewById(R.id.activity_main_name_edit_text)
         val findHalloButton = findViewById<Button>(R.id.activity_main_open_hallo_button)
@@ -44,19 +41,16 @@ class HelloActivity: AppCompatActivity() {
             editor.putString(USER_NAME_KEY, nameEditText.text.toString())
             editor.apply()
         }
-
         fun startingTestActivity() {
             val intent = Intent(this, TestHelloActivity::class.java)
             startActivity(intent)
         }
 
 
-
         findHalloButton.setOnClickListener {
             if (nameEditText.text.isNotBlank()) {
                 addingUserName()
                 startingTestActivity()
-
             }
         }
     }
