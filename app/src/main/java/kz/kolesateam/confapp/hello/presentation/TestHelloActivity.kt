@@ -14,12 +14,12 @@ class TestHelloActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_hello)
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences(
+         val sharedPreferences: SharedPreferences = getSharedPreferences(
                 APPLICATION_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE
         )
 
-        val helloTextView: TextView  = findViewById(R.id.textview_test_hello)
+        val helloTextView: TextView  = findViewById(R.id.activity_test_hello_name_textview)
         val userName = sharedPreferences.getString(USER_NAME_KEY, DEFAULT_USER_NAME)
         helloTextView.text= resources.getString(R.string.hello_user_fmt, userName)
     }

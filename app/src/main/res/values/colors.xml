@@ -11,5 +11,5 @@
     <color name="grey_btn_disabled_solid">#1A1C1819</color>
     <color name="grey_btn_disabled_stroke">#331C1819</color>
     <color name="blue_btn_enabled">#2A81DD</color>
-    <color name="grey_activity_hello_textview_textcolor">#1C1819</color>
+    <color name="activity_hello_textview_color_grey">#1C1819</color>
 </resources>

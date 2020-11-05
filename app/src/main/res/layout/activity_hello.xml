@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:text="@string/what_is_name"
         android:textSize="@dimen/acthello_texview_testsize_24sp"
-        android:textColor="@color/grey_activity_hello_textview_textcolor"
+        android:textColor="@color/activity_hello_textview_color_grey"
         android:textStyle="bold"
         android:padding="@dimen/text_padding_10dp"
         android:layout_marginHorizontal="@dimen/margin_size_16dp"
@@ -71,12 +71,12 @@
         android:hint="@string/enter_your_name"/>
 
     <Button
-        android:id="@+id/activity_main_open_hallo_button"
+        android:id="@+id/activity_main_continue_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="@dimen/btn_textsize_16sp"
-        android:textColor="@drawable/continue_button_text_color"
+        android:textColor="@color/continue_button_text_color"
         android:textAllCaps="false"
         android:padding="@dimen/text_padding_10dp"
         android:text="@string/continue_btn"

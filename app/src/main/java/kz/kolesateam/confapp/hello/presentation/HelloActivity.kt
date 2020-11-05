@@ -15,43 +15,45 @@ private const val TAG = "HelloActivity"
 const val APPLICATION_SHARED_PREFERENCES = "Name"
  const val USER_NAME_KEY = "name"
 
+
 class HelloActivity: AppCompatActivity() {
 
+    private lateinit var nameEditText: EditText
+    private val sharedPreferences: SharedPreferences = getSharedPreferences(
+            APPLICATION_SHARED_PREFERENCES,
+            Context.MODE_PRIVATE
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hello)
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences(
-                APPLICATION_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-        )
+        nameEditText = findViewById(R.id.activity_main_name_edit_text)
+        val findHalloButton = findViewById<Button>(R.id.activity_main_continue_button)
 
-        val nameEditText: EditText = findViewById(R.id.activity_main_name_edit_text)
-        val findHalloButton = findViewById<Button>(R.id.activity_main_open_hallo_button)
+        findHalloButton.setOnClickListener {
+            if (nameEditText.text.isNotBlank()) {
+                saveUserName()
+                startingTestActivity()
+            }
+        }
 
         nameEditText.addTextChangedListener { text ->
             if (text != null) {
                 findHalloButton.isEnabled = text.isNotBlank()
             }
         }
+    }
 
-        fun addingUserName() {
+        private fun saveUserName() {
             val editor = sharedPreferences.edit()
             editor.putString(USER_NAME_KEY, nameEditText.text.toString())
             editor.apply()
         }
-        fun startingTestActivity() {
+
+
+        private fun startingTestActivity() {
             val intent = Intent(this, TestHelloActivity::class.java)
             startActivity(intent)
         }
-
-
-        findHalloButton.setOnClickListener {
-            if (nameEditText.text.isNotBlank()) {
-                addingUserName()
-                startingTestActivity()
-            }
-        }
     }
-}

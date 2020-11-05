@@ -3,7 +3,5 @@
     <string name="what_is_name">Как тебя зовут?</string>
     <string name="enter_your_name">Введите ваше имя</string>
     <string name="continue_btn">Продолжить</string>
-    <string name="hello">Hello</string>
     <string name="hello_user_fmt">Hello %1s </string>
-    <string name="hello_user">Привет,</string>
 </resources>
