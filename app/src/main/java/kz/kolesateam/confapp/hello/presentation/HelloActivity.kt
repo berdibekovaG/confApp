@@ -19,10 +19,6 @@ const val APPLICATION_SHARED_PREFERENCES = "Name"
 class HelloActivity: AppCompatActivity() {
 
     private lateinit var nameEditText: EditText
-    private val sharedPreferences: SharedPreferences = getSharedPreferences(
-            APPLICATION_SHARED_PREFERENCES,
-            Context.MODE_PRIVATE
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +42,10 @@ class HelloActivity: AppCompatActivity() {
     }
 
         private fun saveUserName() {
+            val sharedPreferences: SharedPreferences = getSharedPreferences(
+                    APPLICATION_SHARED_PREFERENCES,
+                    Context.MODE_PRIVATE
+            )
             val editor = sharedPreferences.edit()
             editor.putString(USER_NAME_KEY, nameEditText.text.toString())
             editor.apply()

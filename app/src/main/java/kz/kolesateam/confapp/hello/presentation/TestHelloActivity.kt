@@ -14,7 +14,7 @@ class TestHelloActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_hello)
 
-         val sharedPreferences: SharedPreferences = getSharedPreferences(
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
                 APPLICATION_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE
         )
