@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".events.presentation.UpcomingEventsActivity"
+    android:orientation="vertical"
+
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_size_16dp">
+
+    <Button
+        android:id="@+id/activity_upcoming_events_sync_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_size_16dp"
+        android:layout_marginLeft="@dimen/margin_size_8dp"
+        android:textAllCaps="false"
+        android:text="@string/events_sync_loading" />
+
+    <Button
+        android:id="@+id/activity_upcoming_events_async_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_size_16dp"
+        android:layout_marginRight="@dimen/margin_size_8dp"
+        android:layout_gravity="end"
+        android:textAllCaps="false"
+        android:text="@string/events_async_loading" />
+    </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+                <TextView
+                    android:id="@+id/activity_upcoming_events_response_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     />
+    </ScrollView>
+
+
+</LinearLayout>

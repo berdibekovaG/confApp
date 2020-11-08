@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.events.presentation.UpcomingEventsActivity
 
 
 private const val TAG = "HelloActivity"
@@ -53,7 +54,7 @@ class HelloActivity: AppCompatActivity() {
 
 
         private fun startingTestActivity() {
-            val intent = Intent(this, TestHelloActivity::class.java)
+            val intent = Intent(this, UpcomingEventsActivity::class.java)
             startActivity(intent)
         }
     }
