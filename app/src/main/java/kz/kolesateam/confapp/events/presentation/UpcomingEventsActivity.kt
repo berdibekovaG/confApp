@@ -31,13 +31,11 @@ val apiRetrofit: Retrofit = Retrofit.Builder()
 val apiClient: ApiClient = apiRetrofit.create(ApiClient::class.java)
 
 
-
 class UpcomingEventsActivity : AppCompatActivity() {
 
     private lateinit var responseTextView: TextView
     private lateinit var loadDataButtonSync: Button
     private lateinit var loadDataButtonAsync: Button
-
     private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,22 +50,20 @@ class UpcomingEventsActivity : AppCompatActivity() {
         responseTextView = findViewById(R.id.activity_upcoming_events_response_textview)
         loadDataButtonSync = findViewById(R.id.activity_upcoming_events_sync_btn)
         loadDataButtonAsync = findViewById(R.id.activity_upcoming_events_async_btn)
+
         loadDataButtonSync.setOnClickListener() {
             progressBar.visibility = View.VISIBLE
             loadApiDataSync()
-
         }
 
             loadDataButtonAsync.setOnClickListener(){
                progressBar.visibility = View.VISIBLE
                 loadApiDataAsync()
-
             }
     }
 
 
     private fun loadApiDataSync() {
-
         Thread {
             try {
                 val response: Response<JsonNode> = apiClient.getUpcomingEvents().execute()
@@ -90,17 +86,13 @@ class UpcomingEventsActivity : AppCompatActivity() {
         Log.d("UpComingEventException", "1")
     }
 
-
-
-
-
     private fun loadApiDataAsync() {
         apiClient.getUpcomingEvents().enqueue(object : Callback<JsonNode> {
 
             override fun onResponse(
                 call: Call<JsonNode>,
                 response: Response<JsonNode>) { // все ошибки с сервера
-                if (response.isSuccessful) {
+                 if (response.isSuccessful) {
                     responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, ASYNC_TEXT_COLOR))
                     val body: JsonNode = response.body()!!
                     responseTextView.text = body.toString()
@@ -115,7 +107,6 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 responseTextView.text = t.localizedMessage
                 progressBar.visibility = View.INVISIBLE
             }
-
         })
     }
 }
