@@ -38,7 +38,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
     private lateinit var loadDataButtonSync: Button
     private lateinit var loadDataButtonAsync: Button
 
-   // var progressBar: ProgressBar = findViewById(R.id.progressbar)
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,17 +48,20 @@ class UpcomingEventsActivity : AppCompatActivity() {
     }
 
     private fun bindViews() {
+        progressBar= findViewById(R.id.progressbar)
         responseTextView = findViewById(R.id.activity_upcoming_events_response_textview)
         loadDataButtonSync = findViewById(R.id.activity_upcoming_events_sync_btn)
         loadDataButtonAsync = findViewById(R.id.activity_upcoming_events_async_btn)
         loadDataButtonSync.setOnClickListener() {
+            progressBar.visibility = View.VISIBLE
             loadApiDataSync()
-         //   progressBar.visibility = View.VISIBLE
+
         }
 
             loadDataButtonAsync.setOnClickListener(){
+               progressBar.visibility = View.VISIBLE
                 loadApiDataAsync()
-               // progressBar.visibility = View.VISIBLE
+
             }
     }
 
@@ -73,6 +76,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
                     runOnUiThread {
                         responseTextView.setTextColor(ContextCompat.getColor(this, SYNC_TEXT_COLOR))
                         responseTextView.text = body.toString()
+                        progressBar.visibility = View.INVISIBLE
                     }
                     Log.d("UpComingEventException", "2")
                 }
@@ -80,7 +84,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 runOnUiThread {
                     responseTextView.text = e.localizedMessage
                     responseTextView.setTextColor(ContextCompat.getColor(this, FAIL_TEXT_COLOR))
-                    //progressBar.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                 }}
         }.start()
         Log.d("UpComingEventException", "1")
@@ -100,6 +104,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
                     responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, ASYNC_TEXT_COLOR))
                     val body: JsonNode = response.body()!!
                     responseTextView.text = body.toString()
+                    progressBar.visibility = View.INVISIBLE
                 }
             }
             override fun onFailure(//ошибки, которые произошли до того, как запрос дошел до бека(плохая сеть, долгий запрос)
@@ -108,7 +113,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
             ) {
                 responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, FAIL_TEXT_COLOR))
                 responseTextView.text = t.localizedMessage
-               // progressBar.visibility = View.INVISIBLE
+                progressBar.visibility = View.INVISIBLE
             }
 
         })
