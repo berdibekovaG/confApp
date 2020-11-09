@@ -24,9 +24,9 @@ const val ASYNC_TEXT_COLOR = R.color.activity_upcome_events_async_text
 const val FAIL_TEXT_COLOR = R.color.activity_upcome_events_fail_text
 
 val apiRetrofit: Retrofit = Retrofit.Builder()
-    .baseUrl("http://37.143.8.68:2020")
-    .addConverterFactory(JacksonConverterFactory.create())
-    .build()
+        .baseUrl("http://37.143.8.68:2020")
+        .addConverterFactory(JacksonConverterFactory.create())
+        .build()
 
 val apiClient: ApiClient = apiRetrofit.create(ApiClient::class.java)
 
@@ -46,7 +46,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
     }
 
     private fun bindViews() {
-        progressBar= findViewById(R.id.progressbar)
+        progressBar = findViewById(R.id.progressbar)
         responseTextView = findViewById(R.id.activity_upcoming_events_response_textview)
         loadDataButtonSync = findViewById(R.id.activity_upcoming_events_sync_btn)
         loadDataButtonAsync = findViewById(R.id.activity_upcoming_events_async_btn)
@@ -56,10 +56,10 @@ class UpcomingEventsActivity : AppCompatActivity() {
             loadApiDataSync()
         }
 
-            loadDataButtonAsync.setOnClickListener(){
-               progressBar.visibility = View.VISIBLE
-                loadApiDataAsync()
-            }
+        loadDataButtonAsync.setOnClickListener() {
+            progressBar.visibility = View.VISIBLE
+            loadApiDataAsync()
+        }
     }
 
 
@@ -76,12 +76,13 @@ class UpcomingEventsActivity : AppCompatActivity() {
                     }
                     Log.d("UpComingEventException", "2")
                 }
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 runOnUiThread {
                     responseTextView.text = e.localizedMessage
                     responseTextView.setTextColor(ContextCompat.getColor(this, FAIL_TEXT_COLOR))
                     progressBar.visibility = View.INVISIBLE
-                }}
+                }
+            }
         }.start()
         Log.d("UpComingEventException", "1")
     }
@@ -90,18 +91,19 @@ class UpcomingEventsActivity : AppCompatActivity() {
         apiClient.getUpcomingEvents().enqueue(object : Callback<JsonNode> {
 
             override fun onResponse(
-                call: Call<JsonNode>,
-                response: Response<JsonNode>) { // все ошибки с сервера
-                 if (response.isSuccessful) {
+                    call: Call<JsonNode>,
+                    response: Response<JsonNode>) { // все ошибки с сервера
+                if (response.isSuccessful) {
                     responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, ASYNC_TEXT_COLOR))
                     val body: JsonNode = response.body()!!
                     responseTextView.text = body.toString()
                     progressBar.visibility = View.INVISIBLE
                 }
             }
+
             override fun onFailure(//ошибки, которые произошли до того, как запрос дошел до бека(плохая сеть, долгий запрос)
-                call: Call<JsonNode>,
-                t: Throwable
+                    call: Call<JsonNode>,
+                    t: Throwable
             ) {
                 responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, FAIL_TEXT_COLOR))
                 responseTextView.text = t.localizedMessage
