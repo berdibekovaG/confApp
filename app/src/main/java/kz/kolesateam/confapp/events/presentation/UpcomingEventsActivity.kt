@@ -25,7 +25,6 @@ val apiRetrofit: Retrofit = Retrofit.Builder()
 
 val apiClient: ApiClient = apiRetrofit.create(ApiClient::class.java)
 
-
 class UpcomingEventsActivity : AppCompatActivity() {
 
     private lateinit var responseTextView: TextView
