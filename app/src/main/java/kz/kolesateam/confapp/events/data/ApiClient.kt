@@ -8,5 +8,4 @@ interface ApiClient {
 
     @GET("/upcoming_events")
     fun getUpcomingEvents(): Call<JsonNode>
-
 }

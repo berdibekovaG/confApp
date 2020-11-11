@@ -18,11 +18,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.lang.Exception
 
-
-const val SYNC_TEXT_COLOR = R.color.activity_upcome_events_sync_text
-const val ASYNC_TEXT_COLOR = R.color.activity_upcome_events_async_text
-const val FAIL_TEXT_COLOR = R.color.activity_upcome_events_fail_text
-
 val apiRetrofit: Retrofit = Retrofit.Builder()
         .baseUrl("http://37.143.8.68:2020")
         .addConverterFactory(JacksonConverterFactory.create())
@@ -45,6 +40,14 @@ class UpcomingEventsActivity : AppCompatActivity() {
         bindViews()
     }
 
+    fun View.show() {
+        visibility = View.VISIBLE
+    }
+
+    fun View.gone() {
+        visibility = View.GONE
+    }
+
     private fun bindViews() {
         progressBar = findViewById(R.id.progressbar)
         responseTextView = findViewById(R.id.activity_upcoming_events_response_textview)
@@ -52,17 +55,15 @@ class UpcomingEventsActivity : AppCompatActivity() {
         loadDataButtonAsync = findViewById(R.id.activity_upcoming_events_async_btn)
 
         loadDataButtonSync.setOnClickListener() {
-            progressBar.visibility = View.VISIBLE
+            progressBar.show()
             loadApiDataSync()
         }
 
         loadDataButtonAsync.setOnClickListener() {
-            progressBar.visibility = View.VISIBLE
+            progressBar.show()
             loadApiDataAsync()
         }
     }
-
-
     private fun loadApiDataSync() {
         Thread {
             try {
@@ -70,21 +71,19 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val body: JsonNode = response.body()!!
                     runOnUiThread {
-                        responseTextView.setTextColor(ContextCompat.getColor(this, SYNC_TEXT_COLOR))
+                        responseTextView.setTextColor(ContextCompat.getColor(this, R.color.activity_upcome_events_sync_text))
                         responseTextView.text = body.toString()
-                        progressBar.visibility = View.INVISIBLE
+                        progressBar.gone()
                     }
-                    Log.d("UpComingEventException", "2")
                 }
             } catch (e: Exception) {
                 runOnUiThread {
                     responseTextView.text = e.localizedMessage
-                    responseTextView.setTextColor(ContextCompat.getColor(this, FAIL_TEXT_COLOR))
-                    progressBar.visibility = View.INVISIBLE
+                    responseTextView.setTextColor(ContextCompat.getColor(this, R.color.activity_upcome_events_fail_text))
+                    progressBar.gone()
                 }
             }
         }.start()
-        Log.d("UpComingEventException", "1")
     }
 
     private fun loadApiDataAsync() {
@@ -92,22 +91,22 @@ class UpcomingEventsActivity : AppCompatActivity() {
 
             override fun onResponse(
                     call: Call<JsonNode>,
-                    response: Response<JsonNode>) { // все ошибки с сервера
+                    response: Response<JsonNode>) {
                 if (response.isSuccessful) {
-                    responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, ASYNC_TEXT_COLOR))
+                    responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, R.color.activity_upcome_events_async_text))
                     val body: JsonNode = response.body()!!
                     responseTextView.text = body.toString()
-                    progressBar.visibility = View.INVISIBLE
+                    progressBar.gone()
                 }
             }
 
-            override fun onFailure(//ошибки, которые произошли до того, как запрос дошел до бека(плохая сеть, долгий запрос)
+            override fun onFailure(
                     call: Call<JsonNode>,
                     t: Throwable
             ) {
-                responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, FAIL_TEXT_COLOR))
+                responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, R.color.activity_upcome_events_fail_text))
                 responseTextView.text = t.localizedMessage
-                progressBar.visibility = View.INVISIBLE
+                progressBar.gone()
             }
         })
     }
