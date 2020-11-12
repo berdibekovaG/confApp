@@ -12,4 +12,8 @@
     <color name="grey_btn_disabled_stroke">#331C1819</color>
     <color name="blue_btn_enabled">#2A81DD</color>
     <color name="activity_hello_textview_color_grey">#1C1819</color>
+    <color name="activity_upcome_events_sync_text">#2196F3</color>
+    <color name="activity_upcome_events_async_text">#4CAF50</color>
+    <color name="activity_upcome_events_fail_text">#F44336</color>
+
 </resources>

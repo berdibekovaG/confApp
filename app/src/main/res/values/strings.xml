@@ -4,4 +4,6 @@
     <string name="enter_your_name">Введите ваше имя</string>
     <string name="continue_btn">Продолжить</string>
     <string name="hello_user_fmt">Hello %1s </string>
+    <string name="events_sync_loading">Sync  loading</string>
+    <string name="events_async_loading">Async loading</string>
 </resources>
