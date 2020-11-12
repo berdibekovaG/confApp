@@ -14,10 +14,10 @@ import kz.kolesateam.confapp.events.presentation.UpcomingEventsActivity
 
 private const val TAG = "HelloActivity"
 const val APPLICATION_SHARED_PREFERENCES = "Name"
- const val USER_NAME_KEY = "name"
+const val USER_NAME_KEY = "name"
 
 
-class HelloActivity: AppCompatActivity() {
+class HelloActivity : AppCompatActivity() {
 
     private lateinit var nameEditText: EditText
 
@@ -42,19 +42,18 @@ class HelloActivity: AppCompatActivity() {
         }
     }
 
-        private fun saveUserName() {
-            val sharedPreferences: SharedPreferences = getSharedPreferences(
-                    APPLICATION_SHARED_PREFERENCES,
-                    Context.MODE_PRIVATE
-            )
-            val editor = sharedPreferences.edit()
-            editor.putString(USER_NAME_KEY, nameEditText.text.toString())
-            editor.apply()
-        }
-
-
-        private fun startingTestActivity() {
-            val intent = Intent(this, UpcomingEventsActivity::class.java)
-            startActivity(intent)
-        }
+    private fun saveUserName() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+                APPLICATION_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE
+        )
+        val editor = sharedPreferences.edit()
+        editor.putString(USER_NAME_KEY, nameEditText.text.toString())
+        editor.apply()
     }
+
+    private fun startingTestActivity() {
+        val intent = Intent(this, UpcomingEventsActivity::class.java)
+        startActivity(intent)
+    }
+}
