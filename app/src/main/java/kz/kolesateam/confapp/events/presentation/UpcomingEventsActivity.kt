@@ -76,11 +76,13 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 val response: Response<JsonNode> = apiClient.getUpcomingSynsEvents().execute()
                 if (response.isSuccessful) {
                     val body: JsonNode = response.body()!!
+                    val responseJsonString = body.toString()
+                    val responseJsonArray = JSONArray(responseJsonString)
+                    val branchApiDataList = parseBranchesJsonArray(responseJsonArray)
+
                     runOnUiThread {
+                        responseTextView.text = branchApiDataList.toString()
                         responseTextView.setTextColor(ContextCompat.getColor(this, R.color.activity_upcome_events_sync_text))
-                        responseTextView.text = body.toString()
-                        val responseJsonArray = JSONArray(body.toString())
-                        val branchApiDataList = parseBranchesJsonArray(responseJsonArray)
                         progressBar.gone()
                     }
                 }
@@ -112,8 +114,8 @@ class UpcomingEventsActivity : AppCompatActivity() {
         val id = branchJsonObject.getInt("id")
         val title = branchJsonObject.getString("title")
         val eventsJsonArray = branchJsonObject.getJSONArray("events")
-
         val apiEventsList = mutableListOf<EventApiData>()
+
         for (index in 0 until eventsJsonArray.length()) {
             val eventJsonObject = (eventsJsonArray[index] as? JSONObject) ?: continue
 
@@ -137,6 +139,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
         val endTime = eventJSONObject.getString("endTime")
         val description = eventJSONObject.getString("description")
         val place = eventJSONObject.getString("place")
+
         val speakerJsonObject: JSONObject? = (eventJSONObject.get("speaker") as? JSONObject)
         var speakerData: SpeakerApiData? = null
 
@@ -177,10 +180,9 @@ class UpcomingEventsActivity : AppCompatActivity() {
                     call: Call<List<BranchApiData>>,
                     response: Response<List<BranchApiData>>) {
                 if (response.isSuccessful) {
-                    responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, R.color.activity_upcome_events_async_text))
                     val responseBody = response.body()!!
-
-                    val apiBranchDataList = responseBody
+                    responseTextView.text = responseBody.toString()
+                    responseTextView.setTextColor(ContextCompat.getColor(this@UpcomingEventsActivity, R.color.activity_upcome_events_async_text))
 
                     progressBar.gone()
                 }
