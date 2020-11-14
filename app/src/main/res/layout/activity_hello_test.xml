@@ -72,6 +72,9 @@
         android:paddingBottom="@dimen/activity_hello_padding"
         android:layout_gravity="center"
         android:id="@+id/continue_button"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_hello_button"
+        android:textColor="@drawable/hello_button_text_color"
         />
 
 </LinearLayout>

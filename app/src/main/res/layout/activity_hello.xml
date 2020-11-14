@@ -69,8 +69,8 @@
         android:hint="@string/action_enter_name"
         android:paddingHorizontal="@dimen/activity_hello_margin"
         android:id="@+id/enter_your_name_textView"
-        android:background="@android:color/transparent"
-        android:src="@drawable/text_shape"
+        android:background="@drawable/text_shape"
+        android:textColor="@drawable/hello_text_editor_text_color"
         />
 
     <Button
@@ -82,11 +82,14 @@
         android:typeface="sans"
         android:textStyle="bold"
         android:textSize="@dimen/activity_hello_Button_text_size"
-        android:paddingTop="@dimen/activity_hello_padding"
-        android:paddingBottom="@dimen/activity_hello_padding"
+        android:paddingTop="@dimen/activity_hello_button_padding"
+        android:paddingBottom="@dimen/activity_hello_button_padding"
         android:layout_gravity="center"
         android:enabled="false"
         android:id="@+id/continue_button"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_hello_button"
+        android:textColor="@drawable/hello_button_text_color"
         />
 
 </LinearLayout>
