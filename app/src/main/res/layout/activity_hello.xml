@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".hello.presentation.TestHelloActivity"
     android:orientation="vertical"
     >
 
@@ -50,27 +49,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/whats_your_name"
+        android:text="@string/hello_string"
         android:layout_marginTop="@dimen/activity_hello_margin"
         android:layout_marginHorizontal="@dimen/activity_hello_margin"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="@dimen/activity_hello_View_text_size"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="@dimen/activity_hello_margin"
-        android:textSize="@dimen/activity_hello_EditText_text_size"
-        android:padding="@dimen/activity_hello_padding"
-        android:inputType="text"
-        android:hint="@string/action_enter_name"
-        android:paddingHorizontal="@dimen/activity_hello_margin"
-        android:id="@+id/enter_your_name_textView"
-        android:background="@drawable/text_shape"
-        android:textColor="@drawable/hello_text_editor_text_color"
+        android:layout_gravity="center"
         />
 
     <Button
@@ -85,7 +70,6 @@
         android:paddingTop="@dimen/activity_hello_button_padding"
         android:paddingBottom="@dimen/activity_hello_button_padding"
         android:layout_gravity="center"
-        android:enabled="false"
         android:id="@+id/continue_button"
         android:textAllCaps="false"
         android:background="@drawable/bg_hello_button"
