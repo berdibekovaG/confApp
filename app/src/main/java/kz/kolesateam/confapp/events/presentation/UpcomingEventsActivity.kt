@@ -59,7 +59,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
     }
 
     private fun loadApiDataSync(){
-        apiClient.getUpcomingEvents().enqueue(object : Callback<ResponseBody> {
+        apiClient.getUpcomingEventsSync().enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 val responseBody = response.body()!!
                 val responseJsonString = responseBody.string()
@@ -68,7 +68,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 val apiBranchDataList = parseBranchesJsonArray(responseJsonArray)
 
                 progressBar.visibility = View.GONE
-                responceTextView.setTextColor(Color.parseColor("#F44336"))
+                responceTextView.setTextColor(Color.parseColor("#FF000000"))
                 responceTextView.text = apiBranchDataList.toString()
             }
 
@@ -79,18 +79,27 @@ class UpcomingEventsActivity : AppCompatActivity() {
             }
 
         })
-        /*Thread{
-            Thread.sleep(5000)
-            val response: Response<JsonNode> = apiClient.getUpcomingEvents().execute()
-            if(response.isSuccessful){
-                val body: JsonNode = response.body()!!
-                runOnUiThread{
-                    progressBar.visibility = View.GONE
-                    responceTextView.setTextColor(Color.parseColor("#2196F3"))
-                    responceTextView.text = body.toString()
-                }
+    }
+
+    private fun loadApiDataAsync(){
+        apiClient.getUpcomingEventsAsync().enqueue(object : Callback<List<BranchApiData>> {
+            override fun onResponse(call: Call<List<BranchApiData>>, response: Response<List<BranchApiData>>) {
+                val responseBody = response.body()!!
+
+                val apiBranchDataList = responseBody
+
+                progressBar.visibility = View.GONE
+                responceTextView.setTextColor(Color.parseColor("#FF000000"))
+                responceTextView.text = apiBranchDataList.toString()
             }
-        }.start()*/
+
+            override fun onFailure(call: Call<List<BranchApiData>>, t: Throwable) {
+                progressBar.visibility = View.GONE
+                responceTextView.setTextColor(Color.parseColor("#F44336"))
+                responceTextView.text = t.localizedMessage
+            }
+
+        })
     }
 
     private fun parseBranchesJsonArray(
@@ -98,15 +107,19 @@ class UpcomingEventsActivity : AppCompatActivity() {
     ): List<BranchApiData> {
         val branchList = mutableListOf<BranchApiData>()
         for (index in 0 until responseJsonArray.length()) {
+
             val branchJsonObject = (responseJsonArray[index] as? JSONObject) ?: continue
+
             val BranchApiData = parseBranchJsonObject(branchJsonObject)
+
             branchList.add(BranchApiData)
         }
         return branchList
     }
 
     private fun parseBranchJsonObject(
-            branchJsonObject: JSONObject): BranchApiData {
+            branchJsonObject: JSONObject
+                ): BranchApiData {
         val id = branchJsonObject.getInt("id")
         val title = branchJsonObject.getString("title")
 
@@ -152,7 +165,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
             fullName = speakerJsonObject.getString("fullName")
     )
 
-    private fun loadApiDataAsync(){
+    /*private fun loadApiDataAsync(){
        apiClient.getUpcomingEvents().enqueue(object :Callback<JsonNode> {
            override fun onResponse(call: Call<JsonNode>, response: Response<JsonNode>) {
                if (response.isSuccessful) {
@@ -170,9 +183,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
            }
 
        })
-    }
+    }*/
 }
 
-private fun <T> Call<T>.enqueue(callback: Callback<ResponseBody>) {
 
-}
