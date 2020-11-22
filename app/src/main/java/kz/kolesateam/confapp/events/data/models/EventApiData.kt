@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class EventApiData(
+data class EventApiData(
         @JsonProperty(value = "id")
         val id: Int?,
         @JsonProperty(value = "title")
