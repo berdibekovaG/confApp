@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <TextView
+            android:id="@+id/branch_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Branch title"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/acthello_texview_testsize_24sp" />
+            android:textSize="@dimen/acthello_texview_testsize_24sp"
+            tools:ignore="InvalidId" />
 
         <ImageView
             android:layout_width="32dp"
@@ -36,16 +39,18 @@
             android:layout_height="wrap_content">
 
             <include
-                android:id="@+id/branch_event_1"
+                android:id="@+id/branch_current_event"
                 layout="@layout/event_card_layout"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_size_16dp"
                 android:layout_marginRight="@dimen/margin_size_8dp" />
 
             <include
-                android:id="@+id/branch_event_2"
+                android:id="@+id/branch_next_event"
                 layout="@layout/event_card_layout"
                 android:layout_width="280dp"
+                android:layout_marginRight="@dimen/margin_size_16dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

@@ -9,7 +9,7 @@
         >
 
         <solid
-            android:color="@color/app_primary_blue_color"
+            android:color="@color/white"
             />
 
         <corners android:radius="3dp"/>

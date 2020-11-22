@@ -7,9 +7,9 @@ import retrofit2.http.GET
 
 interface ApiClient {
 
-    @GET("/upcoming_events")
-    fun getUpcomingSynsEvents(): Call<JsonNode>
+  //  @GET("/upcoming_events")
+    //fun getUpcomingSynsEvents(): Call<JsonNode>
 
     @GET("/upcoming_events")
-    fun getUpcomingAsynsEvents(): Call<List<BranchApiData>>
+    fun getUpcomingEvents(): Call<List<BranchApiData>>
 }

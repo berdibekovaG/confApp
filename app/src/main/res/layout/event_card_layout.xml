@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/bg_events_card"
     android:paddingHorizontal="16dp"
     android:paddingTop="4dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="16dp"
+    >
 
 
     <TextView
@@ -43,7 +44,7 @@
         app:layout_constraintTop_toTopOf="@id/event_date_and_place_textview" />
 
     <TextView
-        android:id="@+id/event_speker_name_textiew"
+        android:id="@+id/event_speaker_name_textiew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_size_8dp"
@@ -52,14 +53,14 @@
         app:layout_constraintTop_toBottomOf="@id/event_date_and_place_textview" />
 
     <TextView
-        android:id="@+id/event_spekers_company_textview"
+        android:id="@+id/event_speakers_job_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Speakers company"
+        android:text="Speakers job"
         android:textColor="#888B94"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/event_speker_name_textiew" />
+        app:layout_constraintTop_toBottomOf="@id/event_speaker_name_textiew" />
 
     <TextView
         android:id="@+id/event_title_textview"
@@ -69,6 +70,6 @@
         android:textColor="#1C1819"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/event_spekers_company_textview" />
+        app:layout_constraintTop_toBottomOf="@id/event_speakers_job_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
