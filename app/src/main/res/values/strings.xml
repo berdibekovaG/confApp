@@ -6,4 +6,5 @@
     <string name="hello_user_fmt">Hello %1s </string>
     <string name="events_sync_loading">Sync  loading</string>
     <string name="events_async_loading">Async loading</string>
+    <string name="chosen">В избранное</string>
 </resources>
