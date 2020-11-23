@@ -12,8 +12,9 @@
         android:id="@+id/activity_upcoming_events_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/branch_item"
+        android:clipToPadding="false"
+        android:paddingBottom="72dp"
         tools:itemCount="5"
         />
 

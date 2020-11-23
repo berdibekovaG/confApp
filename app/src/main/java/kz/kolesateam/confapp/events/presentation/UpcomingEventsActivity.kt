@@ -3,13 +3,15 @@ package kz.kolesateam.confapp.events.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.ApiClient
 import kz.kolesateam.confapp.events.data.models.BranchApiData
+import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,12 +53,6 @@ class UpcomingEventsActivity : AppCompatActivity() {
         visibility = View.GONE
     }
 
-    private fun bindViews() {
-        recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
-        progressBar = findViewById(R.id.progressbar)
-        recyclerView.adapter = branchAdapter
-    }
-
     private fun loadApiData() {
         apiClient.getUpcomingEvents().enqueue(object : Callback<List<BranchApiData>> {
 
@@ -65,7 +61,26 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 response: Response<List<BranchApiData>>
             ) {
                 if (response.isSuccessful) {
-                    branchAdapter.setList(response.body()!!)
+                    val upcomingEventListItemList: MutableList<UpcomingEventListItem> = mutableListOf()
+                    val headerListItem:UpcomingEventListItem  = UpcomingEventListItem(
+                        type = 1,
+                    data = "Гаухар"
+                    )
+
+                    // в response.body() лежит список branchApiData объектов
+                    // создаем новый лист, переконвертируем в новый тип upComingEventListItem
+                    val branchListItemList: List<UpcomingEventListItem> = response.body()!!.map { branchApiData ->
+                        UpcomingEventListItem(
+                            type = 2,
+                            data = branchApiData
+                        )
+                    }
+
+                    //сформировали новый список где первый - header
+                    upcomingEventListItemList.add(headerListItem)
+                    upcomingEventListItemList.addAll(branchListItemList)
+
+                    branchAdapter.setList(upcomingEventListItemList)
                     progressBar.gone()
                 }
             }
@@ -74,15 +89,22 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 call: Call<List<BranchApiData>>,
                 t: Throwable
             ) {
-                responseTextView.setTextColor(
-                    ContextCompat.getColor(
-                        this@UpcomingEventsActivity,
-                        R.color.activity_upcome_events_fail_text
-                    )
-                )
                 responseTextView.text = t.localizedMessage
                 progressBar.gone()
             }
         })
     }
+
+
+    private fun bindViews() {
+        recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
+        progressBar = findViewById(R.id.progressbar)
+        recyclerView.adapter = branchAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this,
+        LinearLayoutManager.VERTICAL,
+        false,
+
+            )
+    }
+
 }

@@ -33,7 +33,7 @@ class BranchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     // выключаем первый ивент
     init {
-        branchCurrentEvent.findViewById<TextView>(R.id.event_state_textview).visibility = View.GONE
+        branchCurrentEvent.findViewById<TextView>(R.id.event_state_textview).visibility = View.INVISIBLE
     }
 
 
