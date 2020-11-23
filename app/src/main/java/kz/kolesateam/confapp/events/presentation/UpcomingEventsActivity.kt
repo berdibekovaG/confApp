@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
@@ -13,6 +14,7 @@ import kz.kolesateam.confapp.events.data.ApiClient
 import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
+import kz.kolesateam.confapp.events.presentation.view.UpcomingClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,16 +36,16 @@ class UpcomingEventsActivity : AppCompatActivity() {
     private lateinit var responseTextView: TextView
     private lateinit var progressBar: ProgressBar
 
-    private val branchAdapter: BranchAdapter = BranchAdapter()
+    private val branchAdapter: BranchAdapter = BranchAdapter(getEventClickListener())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upcoming_events)
-
         bindViews()
-
         loadApiData()
     }
+
+
 
     fun View.show() {
         visibility = View.VISIBLE
@@ -54,6 +56,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
     }
 
     private fun loadApiData() {
+        //поставить прогресс бар
         apiClient.getUpcomingEvents().enqueue(object : Callback<List<BranchApiData>> {
 
             override fun onResponse(
@@ -105,6 +108,13 @@ class UpcomingEventsActivity : AppCompatActivity() {
         false,
 
             )
+    }
+    private fun getEventClickListener() : UpcomingClickListener = object : UpcomingClickListener {
+        override fun onEventClick(branchId: String, eventId: String) {
+            Toast.makeText(this@UpcomingEventsActivity,
+                "Branch: $branchId, Event: $eventId",Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 }

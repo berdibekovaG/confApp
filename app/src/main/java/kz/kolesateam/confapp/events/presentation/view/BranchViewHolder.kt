@@ -8,11 +8,17 @@ import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.EventApiData
 
 
-class BranchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-    private val branchCurrentEvent: View = itemView.findViewById(R.id.branch_current_event)
-    private val branchNextEvent: View = itemView.findViewById(R.id.branch_next_event)
+class BranchViewHolder(
+    view : View,
+    private val eventClickListener: UpcomingClickListener,
+)
+    : RecyclerView.ViewHolder(view) {
 
-    private val branchTitle: TextView = itemView.findViewById(R.id.branch_title)
+    private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
+    private val branchNextEvent: View = view.findViewById(R.id.branch_next_event)
+
+    private val eventContainer: View = view.findViewById(R.id.branch_list_item_container)
+    private val branchTitle: TextView = view.findViewById(R.id.branch_title)
 
     private val currentEventDateAndPlace: TextView =
         branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
@@ -64,6 +70,11 @@ class BranchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         nextSpeakersJob.text = nextEvent.speaker?.job
         nextEventTitle.text = nextEvent.title
 
-
+        eventContainer.setOnClickListener{
+            eventClickListener.onEventClick(
+                branchApiData.id.toString(),
+                currentEvent.id.toString()
+            )
+        }
     }
 }

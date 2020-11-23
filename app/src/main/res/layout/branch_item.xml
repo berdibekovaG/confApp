@@ -19,6 +19,7 @@
             android:text="Branch title"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/acthello_texview_testsize_24sp"
+            android:clickable="true"
             tools:ignore="InvalidId" />
 
         <ImageView
@@ -38,7 +39,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/branch_list_item_container">
 
             <include
                 android:id="@+id/branch_current_event"

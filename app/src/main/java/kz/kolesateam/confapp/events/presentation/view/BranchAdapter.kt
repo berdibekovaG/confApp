@@ -8,18 +8,27 @@ import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 
-class BranchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BranchAdapter(
+    private val eventClickListener: UpcomingClickListener,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val dataList: MutableList<UpcomingEventListItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType){
-            1 -> HeadVIewHolder(LayoutInflater.from(parent.context)
-                .inflate(R.layout.header_layout, parent, false))
-            else -> BranchViewHolder(View.inflate(parent.context, R.layout.branch_item, null))
+        return when (viewType) {
 
+            1 -> HeadVIewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.header_layout, parent, false)
+
+            )
+            else ->
+                BranchViewHolder(View.inflate(parent.context, R.layout.branch_item, null),
+                   eventClickListener = eventClickListener,
+                )
+
+            }
         }
-    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
       if(holder is HeadVIewHolder){
