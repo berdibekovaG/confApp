@@ -1,6 +1,7 @@
 package kz.kolesateam.confapp.events.presentation.view
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
@@ -14,11 +15,14 @@ class BranchViewHolder(
 )
     : RecyclerView.ViewHolder(view) {
 
+
     private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
     private val branchNextEvent: View = view.findViewById(R.id.branch_next_event)
 
     private val eventContainer: View = view.findViewById(R.id.branch_list_item_container)
     private val branchTitle: TextView = view.findViewById(R.id.branch_title)
+    private val favoriteImage: ImageView = view.findViewById(R.id.ic_favorite_imageview)
+        //  private val favoriteImageFill: ImageView = view.findViewById(R.drawable.ic_favorite_filled_imageview)
 
     private val currentEventDateAndPlace: TextView =
         branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
@@ -39,7 +43,8 @@ class BranchViewHolder(
 
     // выключаем первый ивент
     init {
-        branchCurrentEvent.findViewById<TextView>(R.id.event_state_textview).visibility = View.INVISIBLE
+        branchCurrentEvent.findViewById<TextView>(R.id.event_state_textview).visibility =
+            View.INVISIBLE
     }
 
 
@@ -52,6 +57,7 @@ class BranchViewHolder(
             currentEvent.endTime,
             currentEvent.place,
         )
+        onClickListeners(branchApiData)
 
         currentEventDateAndPlace.text = currentEventDateAndPlaceText
         currentSpeakerName.text = currentEvent.speaker?.fullName ?: "noname"
@@ -70,10 +76,28 @@ class BranchViewHolder(
         nextSpeakersJob.text = nextEvent.speaker?.job
         nextEventTitle.text = nextEvent.title
 
-        eventContainer.setOnClickListener{
-            eventClickListener.onEventClick(
+    }
+
+    fun onClickListeners(branchApiData: BranchApiData) {
+
+
+        eventContainer.setOnClickListener {
+            eventClickListener.onEventClickListener(
                 branchApiData.id.toString(),
-                currentEvent.id.toString()
+                branchCurrentEvent.id.toString()
+            )
+        }
+
+        branchTitle.setOnClickListener{
+            eventClickListener.onBranchClickListener(
+                branchApiData.id.toString()
+            )
+        }
+
+        favoriteImage.setOnClickListener{
+            eventClickListener.onFavoriteClickListener(
+                favoriteImage,
+                branchCurrentEvent.id.toString()
             )
         }
     }

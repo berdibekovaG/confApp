@@ -3,10 +3,7 @@ package kz.kolesateam.confapp.events.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
@@ -110,9 +107,22 @@ class UpcomingEventsActivity : AppCompatActivity() {
             )
     }
     private fun getEventClickListener() : UpcomingClickListener = object : UpcomingClickListener {
-        override fun onEventClick(branchId: String, eventId: String) {
+
+        override fun onBranchClickListener(branchId: String) {
+            Toast.makeText(this@UpcomingEventsActivity,
+                "Branch: $branchId",Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        override fun onEventClickListener(branchId: String, eventId: String) {
             Toast.makeText(this@UpcomingEventsActivity,
                 "Branch: $branchId, Event: $eventId",Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        override fun onFavoriteClickListener(image: ImageView, eventId: String) {
+            Toast.makeText(this@UpcomingEventsActivity,
+                "нажато сердечко", Toast.LENGTH_SHORT
             ).show()
         }
     }
