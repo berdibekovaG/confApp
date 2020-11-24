@@ -9,4 +9,14 @@
     <dimen name="text_padding_10dp">10dp</dimen>
     <dimen name="margin_size_8dp">8dp</dimen>
     <dimen name="btn_textsize_16sp">16sp</dimen>
+    <dimen name="padding_72dp">72dp</dimen>
+    <dimen name="padding_4dp">4dp</dimen>
+    <dimen name="bnt_padding_8dp">8dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="imageview_32dp">32dp</dimen>
+    <dimen name="card_size_320dp">320dp</dimen>
+    <dimen name="textview_textsize_13sp">13sp</dimen>
+    <dimen name="margin_size_4dp">4dp</dimen>
+    <dimen name="image_view_size_14dp">14dp</dimen>
+    <dimen name="imageview_size_22dp">22dp</dimen>
 </resources>

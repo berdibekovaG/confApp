@@ -16,25 +16,23 @@ class BranchAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-
             1 -> HeadVIewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.header_layout, parent, false)
-
             )
             else ->
-                BranchViewHolder(View.inflate(parent.context, R.layout.branch_item, null),
-                   eventClickListener = eventClickListener,
+                BranchViewHolder(
+                    View.inflate(parent.context, R.layout.branch_item, null),
+                    eventClickListener = eventClickListener,
                 )
-
-            }
         }
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-      if(holder is HeadVIewHolder){
-          holder.onBind(dataList[position].data as String)
-      }
-        if ( holder is BranchViewHolder)
+        if (holder is HeadVIewHolder) {
+            holder.onBind(dataList[position].data as String)
+        }
+        if (holder is BranchViewHolder)
             holder.onBind(dataList[position].data as BranchApiData)
     }
 
@@ -46,7 +44,7 @@ class BranchAdapter(
         return dataList[position].type
     }
 
-    fun setList(branchApiDataList: List<UpcomingEventListItem>){
+    fun setList(branchApiDataList: List<UpcomingEventListItem>) {
         dataList.clear()
         dataList.addAll(branchApiDataList)
         notifyDataSetChanged()

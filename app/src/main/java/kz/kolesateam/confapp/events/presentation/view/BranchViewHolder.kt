@@ -8,13 +8,10 @@ import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.EventApiData
 
-
 class BranchViewHolder(
-    view : View,
+    view: View,
     private val eventClickListener: UpcomingClickListener,
-)
-    : RecyclerView.ViewHolder(view) {
-
+) : RecyclerView.ViewHolder(view) {
 
     private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
     private val branchNextEvent: View = view.findViewById(R.id.branch_next_event)
@@ -22,7 +19,7 @@ class BranchViewHolder(
     private val eventContainer: View = view.findViewById(R.id.branch_list_item_container)
     private val branchTitle: TextView = view.findViewById(R.id.branch_title)
     private val favoriteImage: ImageView = view.findViewById(R.id.ic_favorite_imageview)
-        //  private val favoriteImageFill: ImageView = view.findViewById(R.drawable.ic_favorite_filled_imageview)
+    // private val favoriteImageFill: ImageView = view.findViewById(R.id.ic_favorite_imageview_fill)
 
     private val currentEventDateAndPlace: TextView =
         branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
@@ -47,7 +44,6 @@ class BranchViewHolder(
             View.INVISIBLE
     }
 
-
     fun onBind(branchApiData: BranchApiData) {
         branchTitle.text = branchApiData.title
         val currentEvent: EventApiData = branchApiData.events.first()
@@ -64,7 +60,6 @@ class BranchViewHolder(
         currentSpeakersJob.text = currentEvent.speaker?.job
         currentEventTitle.text = currentEvent.title
 
-
         val nextEvent: EventApiData = branchApiData.events.last()
         val nextEventDateAndPlaceText = "%s - %s • %s".format(
             nextEvent.startTime,
@@ -75,11 +70,9 @@ class BranchViewHolder(
         nextSpeakerName.text = nextEvent.speaker?.fullName ?: "noname"
         nextSpeakersJob.text = nextEvent.speaker?.job
         nextEventTitle.text = nextEvent.title
-
     }
 
     fun onClickListeners(branchApiData: BranchApiData) {
-
 
         eventContainer.setOnClickListener {
             eventClickListener.onEventClickListener(
@@ -87,14 +80,12 @@ class BranchViewHolder(
                 branchCurrentEvent.id.toString()
             )
         }
-
-        branchTitle.setOnClickListener{
+        branchTitle.setOnClickListener {
             eventClickListener.onBranchClickListener(
                 branchApiData.id.toString()
             )
         }
-
-        favoriteImage.setOnClickListener{
+        favoriteImage.setOnClickListener {
             eventClickListener.onFavoriteClickListener(
                 favoriteImage,
                 branchCurrentEvent.id.toString()
@@ -102,3 +93,4 @@ class BranchViewHolder(
         }
     }
 }
+

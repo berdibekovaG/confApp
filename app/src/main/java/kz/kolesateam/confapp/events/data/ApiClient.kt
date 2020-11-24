@@ -6,10 +6,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiClient {
-
-  //  @GET("/upcoming_events")
-    //fun getUpcomingSynsEvents(): Call<JsonNode>
-
     @GET("/upcoming_events")
     fun getUpcomingEvents(): Call<List<BranchApiData>>
 }

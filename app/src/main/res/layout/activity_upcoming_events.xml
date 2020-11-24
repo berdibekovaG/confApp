@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_upcoming_events_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/branch_item"
         android:clipToPadding="false"
-        android:paddingBottom="72dp"
+        android:paddingBottom="@dimen/padding_72dp"
         tools:itemCount="5"
-        />
+        tools:listitem="@layout/branch_item" />
 
     <Button
         android:layout_width="154dp"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_favorite_border"
-        android:text="@string/chosen"
-        android:drawablePadding="4dp"
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="@dimen/margin_size_16dp"
         android:background="@drawable/bg_to_favorite_button"
-        android:padding="8dp"
-        android:textColor="#2A81DD"
+        android:drawableLeft="@drawable/ic_favorite_border"
+        android:drawablePadding="@dimen/padding_4dp"
+        android:padding="@dimen/bnt_padding_8dp"
+        android:text="@string/chosen"
         android:textAllCaps="false"
-        />
+        android:textColor="#2A81DD" />
 
 
     <ProgressBar

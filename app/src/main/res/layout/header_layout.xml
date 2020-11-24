@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/padding_16dp">
 
     <ImageView
 
@@ -18,9 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:layout_marginTop="16dp"
-        android:textColor="#FAFAFA"
-        android:textSize="13sp"
-        tools:text="Привет, Васян" />
+        android:layout_marginTop="@dimen/margin_size_16dp"
+        android:textColor="@color/textview_event_text_white"
+        android:textSize="@dimen/textview_textsize_13sp"
+        tools:text="@string/header_tools_text" />
 
 </LinearLayout>

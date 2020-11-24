@@ -1,5 +1,7 @@
 package kz.kolesateam.confapp.events.presentation
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,25 +9,16 @@ import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
-import kz.kolesateam.confapp.events.data.ApiClient
 import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
+import kz.kolesateam.confapp.events.data.network.apiClient
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
 import kz.kolesateam.confapp.events.presentation.view.UpcomingClickListener
+import kz.kolesateam.confapp.hello.presentation.APPLICATION_SHARED_PREFERENCES
+import kz.kolesateam.confapp.hello.presentation.USER_NAME_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.jackson.JacksonConverterFactory
-
-private const val BASE_URL = " http://37.143.8.68:2020"
-
-val apiRetrofit: Retrofit = Retrofit.Builder()
-    .baseUrl(BASE_URL)
-    .addConverterFactory(JacksonConverterFactory.create())
-    .build()
-
-val apiClient: ApiClient = apiRetrofit.create(ApiClient::class.java)
 
 class UpcomingEventsActivity : AppCompatActivity() {
 
@@ -42,8 +35,6 @@ class UpcomingEventsActivity : AppCompatActivity() {
         loadApiData()
     }
 
-
-
     fun View.show() {
         visibility = View.VISIBLE
     }
@@ -52,8 +43,17 @@ class UpcomingEventsActivity : AppCompatActivity() {
         visibility = View.GONE
     }
 
+    fun saveUserName(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            APPLICATION_SHARED_PREFERENCES,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(USER_NAME_KEY, "User").toString()
+    }
+
     private fun loadApiData() {
-        //поставить прогресс бар
+        progressBar.show()
         apiClient.getUpcomingEvents().enqueue(object : Callback<List<BranchApiData>> {
 
             override fun onResponse(
@@ -61,20 +61,21 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 response: Response<List<BranchApiData>>
             ) {
                 if (response.isSuccessful) {
-                    val upcomingEventListItemList: MutableList<UpcomingEventListItem> = mutableListOf()
-                    val headerListItem:UpcomingEventListItem  = UpcomingEventListItem(
+                    val upcomingEventListItemList: MutableList<UpcomingEventListItem> =
+                        mutableListOf()
+                    val headerListItem: UpcomingEventListItem = UpcomingEventListItem(
                         type = 1,
-                    data = "Гаухар"
+                        data = getString(R.string.hello_user_fmt,saveUserName())
                     )
-
                     // в response.body() лежит список branchApiData объектов
                     // создаем новый лист, переконвертируем в новый тип upComingEventListItem
-                    val branchListItemList: List<UpcomingEventListItem> = response.body()!!.map { branchApiData ->
-                        UpcomingEventListItem(
-                            type = 2,
-                            data = branchApiData
-                        )
-                    }
+                    val branchListItemList: List<UpcomingEventListItem> =
+                        response.body()!!.map { branchApiData ->
+                            UpcomingEventListItem(
+                                type = 2,
+                                data = branchApiData
+                            )
+                        }
 
                     //сформировали новый список где первый - header
                     upcomingEventListItemList.add(headerListItem)
@@ -95,36 +96,39 @@ class UpcomingEventsActivity : AppCompatActivity() {
         })
     }
 
-
     private fun bindViews() {
         recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
         progressBar = findViewById(R.id.progressbar)
         recyclerView.adapter = branchAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this,
-        LinearLayoutManager.VERTICAL,
-        false,
+        recyclerView.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL,
+            false,
 
             )
     }
-    private fun getEventClickListener() : UpcomingClickListener = object : UpcomingClickListener {
+
+    private fun getEventClickListener(): UpcomingClickListener = object : UpcomingClickListener {
 
         override fun onBranchClickListener(branchId: String) {
-            Toast.makeText(this@UpcomingEventsActivity,
-                "Branch: $branchId",Toast.LENGTH_SHORT
+            Toast.makeText(
+                this@UpcomingEventsActivity,
+                "Branch: $branchId", Toast.LENGTH_SHORT
             ).show()
         }
 
         override fun onEventClickListener(branchId: String, eventId: String) {
-            Toast.makeText(this@UpcomingEventsActivity,
-                "Branch: $branchId, Event: $eventId",Toast.LENGTH_SHORT
+            Toast.makeText(
+                this@UpcomingEventsActivity,
+                "Branch: $branchId, Event: $eventId", Toast.LENGTH_SHORT
             ).show()
         }
 
         override fun onFavoriteClickListener(image: ImageView, eventId: String) {
-            Toast.makeText(this@UpcomingEventsActivity,
+            Toast.makeText(
+                this@UpcomingEventsActivity,
                 "нажато сердечко", Toast.LENGTH_SHORT
             ).show()
         }
     }
-
 }

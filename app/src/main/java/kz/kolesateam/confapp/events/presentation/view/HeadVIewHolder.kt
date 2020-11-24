@@ -7,9 +7,9 @@ import kz.kolesateam.confapp.R
 
 class HeadVIewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val userNameTextView =itemView.findViewById<TextView>(R.id.header_username_textview)
+    private val userNameTextView = itemView.findViewById<TextView>(R.id.header_username_textview)
 
-    fun onBind(userName: String){
+    fun onBind(userName: String) {
         userNameTextView.text = userName
     }
 }
