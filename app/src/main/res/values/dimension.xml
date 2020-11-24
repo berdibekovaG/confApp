@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_hello_header">165dp</dimen>
+    <dimen name="activity_hello_margin">16dp</dimen>
+    <dimen name="activity_hello_padding">10dp</dimen>
+    <dimen name="activity_hello_button_padding">15dp</dimen>
+    <dimen name="activity_hello_View_text_size">24sp</dimen>
+    <dimen name="activity_hello_EditText_text_size">20sp</dimen>
+    <dimen name="activity_hello_Button_text_size">18sp</dimen>
+    <dimen name="event_margin">10dp</dimen>
+    </resources>
