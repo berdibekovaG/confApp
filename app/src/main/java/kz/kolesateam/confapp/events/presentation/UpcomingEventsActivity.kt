@@ -68,13 +68,13 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 val apiBranchDataList = parseBranchesJsonArray(responseJsonArray)
 
                 progressBar.visibility = View.GONE
-                responceTextView.setTextColor(getResources().getColor(R.color.syncButton_text_color))
+                responceTextView.setTextColor(Color.parseColor("#FF000000"))
                 responceTextView.text = apiBranchDataList.toString()
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 progressBar.visibility = View.GONE
-                responceTextView.setTextColor(getResources().getColor(R.color.error_message_text_color))
+                responceTextView.setTextColor(Color.parseColor("#F44336"))
                 responceTextView.text = t.localizedMessage
             }
 
@@ -89,13 +89,13 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 val apiBranchDataList = responseBody
 
                 progressBar.visibility = View.GONE
-                responceTextView.setTextColor(getResources().getColor(R.color.asyncButton_text_color))
+                responceTextView.setTextColor(Color.parseColor("#FF000000"))
                 responceTextView.text = apiBranchDataList.toString()
             }
 
             override fun onFailure(call: Call<List<BranchApiData>>, t: Throwable) {
                 progressBar.visibility = View.GONE
-                responceTextView.setTextColor(getResources().getColor(R.color.error_message_text_color))
+                responceTextView.setTextColor(Color.parseColor("#F44336"))
                 responceTextView.text = t.localizedMessage
             }
 
@@ -164,6 +164,26 @@ class UpcomingEventsActivity : AppCompatActivity() {
     ): SpeakerApiData = SpeakerApiData(
             fullName = speakerJsonObject.getString("fullName")
     )
+
+    /*private fun loadApiDataAsync(){
+       apiClient.getUpcomingEvents().enqueue(object :Callback<JsonNode> {
+           override fun onResponse(call: Call<JsonNode>, response: Response<JsonNode>) {
+               if (response.isSuccessful) {
+                   progressBar.visibility = View.GONE
+                   responceTextView.setTextColor(Color.parseColor("#4CAF50"))
+                   val body: JsonNode = response.body()!!
+                   responceTextView.text = body.toString()
+               }
+           }
+
+           override fun onFailure(call: Call<JsonNode>, t: Throwable) {
+               progressBar.visibility = View.GONE
+               responceTextView.setTextColor(Color.parseColor("#F44336"))
+               responceTextView.text = t.localizedMessage
+           }
+
+       })
+    }*/
 }
 
 
