@@ -1,12 +1,3 @@
 <resources>
     <string name="app_name">ConfApp</string>
-    <string name="whats_your_name">Как тебя зовут?</string>
-    <string name="hello_some_user_fmt">Привет, %1s</string>
-    <string name="action_continue">Продолжить</string>
-    <string name="action_back">Назад</string>
-    <string name="action_enter_name">Введи имя</string>
-    <string name="hello_string">Привет!</string>
-    <string name="event_sync_loading">Sync loading</string>
-    <string name="event_async_loading">Async loading</string>
-
 </resources>
