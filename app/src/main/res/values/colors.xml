@@ -20,5 +20,6 @@
     <color name="textview_dataplace_text_grey">#888B94</color>
     <color name="textview_event_text_white">#FAFAFA</color>
     <color name="textview_title_text_black">#1C1819</color>
+    <color name="textview_textcolor_grey">#888B94</color>
 
 </resources>
