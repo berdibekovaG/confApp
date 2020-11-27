@@ -9,8 +9,8 @@ import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.EventApiData
 
 class BranchViewHolder(
-    view: View,
-    private val eventClickListener: UpcomingClickListener,
+        view: View,
+        private val eventClickListener: UpcomingClickListener,
 ) : RecyclerView.ViewHolder(view) {
 
     private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
@@ -22,26 +22,26 @@ class BranchViewHolder(
     // private val favoriteImageFill: ImageView = view.findViewById(R.id.ic_favorite_imageview_fill)
 
     private val currentEventDateAndPlace: TextView =
-        branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
+            branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
     private val currentSpeakerName: TextView =
-        branchCurrentEvent.findViewById(R.id.event_speaker_name_textiew)
+            branchCurrentEvent.findViewById(R.id.event_speaker_name_textiew)
     private val currentSpeakersJob: TextView =
-        branchCurrentEvent.findViewById(R.id.event_speakers_job_textview)
+            branchCurrentEvent.findViewById(R.id.event_speakers_job_textview)
     private val currentEventTitle: TextView =
-        branchCurrentEvent.findViewById(R.id.event_title_textview)
+            branchCurrentEvent.findViewById(R.id.event_title_textview)
 
     private val nextEventDateAndPlace: TextView =
-        branchNextEvent.findViewById(R.id.event_date_and_place_textview)
+            branchNextEvent.findViewById(R.id.event_date_and_place_textview)
     private val nextSpeakerName: TextView =
-        branchNextEvent.findViewById(R.id.event_speaker_name_textiew)
+            branchNextEvent.findViewById(R.id.event_speaker_name_textiew)
     private val nextSpeakersJob: TextView =
-        branchNextEvent.findViewById(R.id.event_speakers_job_textview)
+            branchNextEvent.findViewById(R.id.event_speakers_job_textview)
     private val nextEventTitle: TextView = branchNextEvent.findViewById(R.id.event_title_textview)
 
     // выключаем первый ивент
     init {
         branchCurrentEvent.findViewById<TextView>(R.id.event_state_textview).visibility =
-            View.INVISIBLE
+                View.INVISIBLE
     }
 
     fun onBind(branchApiData: BranchApiData) {
@@ -49,9 +49,9 @@ class BranchViewHolder(
         val currentEvent: EventApiData = branchApiData.events.first()
 
         val currentEventDateAndPlaceText = "%s - %s • %s".format(
-            currentEvent.startTime,
-            currentEvent.endTime,
-            currentEvent.place,
+                currentEvent.startTime,
+                currentEvent.endTime,
+                currentEvent.place,
         )
         onClickListeners(branchApiData)
 
@@ -62,9 +62,9 @@ class BranchViewHolder(
 
         val nextEvent: EventApiData = branchApiData.events.last()
         val nextEventDateAndPlaceText = "%s - %s • %s".format(
-            nextEvent.startTime,
-            nextEvent.endTime,
-            nextEvent.place,
+                nextEvent.startTime,
+                nextEvent.endTime,
+                nextEvent.place,
         )
         nextEventDateAndPlace.text = nextEventDateAndPlaceText
         nextSpeakerName.text = nextEvent.speaker?.fullName ?: "noname"
@@ -75,20 +75,23 @@ class BranchViewHolder(
     fun onClickListeners(branchApiData: BranchApiData) {
 
         eventContainer.setOnClickListener {
-            eventClickListener.onEventClickListener(
-                branchApiData.id.toString(),
-                branchCurrentEvent.id.toString()
-            )
+            branchApiData.events.first().title?.let { it1 ->
+                eventClickListener.onEventClickListener(
+                        it1
+                )
+            }
         }
         branchTitle.setOnClickListener {
-            eventClickListener.onBranchClickListener(
-                branchApiData.id.toString()
-            )
+            branchApiData.title?.let { it1 ->
+                eventClickListener.onBranchClickListener(
+                        it1
+                )
+            }
         }
         favoriteImage.setOnClickListener {
             eventClickListener.onFavoriteClickListener(
-                favoriteImage,
-                branchCurrentEvent.id.toString()
+                    favoriteImage,
+                    branchCurrentEvent.id.toString()
             )
         }
     }

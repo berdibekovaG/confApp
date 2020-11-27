@@ -6,9 +6,7 @@
     android:background="@drawable/bg_events_card"
     android:paddingHorizontal="@dimen/padding_16dp"
     android:paddingTop="@dimen/padding_4dp"
-    android:paddingBottom="@dimen/padding_16dp"
-    >
-
+    android:paddingBottom="@dimen/padding_16dp">
 
     <TextView
         android:id="@+id/event_state_textview"
@@ -42,6 +40,8 @@
         android:layout_width="@dimen/image_view_size_14dp"
         android:layout_height="@dimen/imageview_size_22dp"
         android:background="@drawable/favorite_button"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="@id/event_date_and_place_textview"
         app:layout_constraintLeft_toRightOf="@id/event_date_and_place_textview"
         app:layout_constraintRight_toRightOf="parent"

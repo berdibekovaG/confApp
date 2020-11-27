@@ -4,8 +4,8 @@ import android.widget.ImageView
 
 interface UpcomingClickListener {
 
-    fun onBranchClickListener(branchId: String)
-    fun onEventClickListener(branchId:String, eventId: String)
+    fun onBranchClickListener(branchTitle: String)
+    fun onEventClickListener(eventTitle: String)
     fun onFavoriteClickListener(image: ImageView, eventId: String)
 
 
