@@ -83,6 +83,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
                     progressBar.gone()
                 }
             }
+
             override fun onFailure(
                     call: Call<List<BranchApiData>>,
                     t: Throwable
@@ -92,6 +93,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun bindViews() {
         recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
         progressBar = findViewById(R.id.progressbar)
@@ -100,8 +102,9 @@ class UpcomingEventsActivity : AppCompatActivity() {
                 this,
                 LinearLayoutManager.VERTICAL,
                 false,
-                )
+        )
     }
+
     private fun getEventClickListener(): UpcomingClickListener = object : UpcomingClickListener {
 
         override fun onBranchClickListener(branchTitle: String) {
@@ -110,16 +113,33 @@ class UpcomingEventsActivity : AppCompatActivity() {
                     "Branch: $branchTitle", Toast.LENGTH_SHORT
             ).show()
         }
-        override fun onEventClickListener(eventTitle: String) {
+
+        override fun onEventClickListenerCurrent(eventTitle: String) {
             Toast.makeText(
                     this@UpcomingEventsActivity,
                     "Event Title: $eventTitle", Toast.LENGTH_SHORT
             ).show()
         }
-        override fun onFavoriteClickListener(image: ImageView, eventId: String) {
+
+
+        override fun onEventClickListenerNext(eventTitle: String) {
+            Toast.makeText(
+                    this@UpcomingEventsActivity,
+                    "Event Title2: $eventTitle", Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        override fun onFavoriteClickListenerCurrent(image: ImageView, eventId: String) {
             Toast.makeText(
                     this@UpcomingEventsActivity,
                     "нажато сердечко", Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        override fun onFavoriteClickListenerNext(image: ImageView, eventId: String) {
+            Toast.makeText(
+                    this@UpcomingEventsActivity,
+                    "нажато сердечко 2", Toast.LENGTH_SHORT
             ).show()
         }
     }

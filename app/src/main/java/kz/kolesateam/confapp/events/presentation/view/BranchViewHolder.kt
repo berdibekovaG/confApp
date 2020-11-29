@@ -13,14 +13,10 @@ class BranchViewHolder(
         private val eventClickListener: UpcomingClickListener,
 ) : RecyclerView.ViewHolder(view) {
 
-    private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
-    private val branchNextEvent: View = view.findViewById(R.id.branch_next_event)
-
     private val eventContainer: View = view.findViewById(R.id.branch_list_item_container)
     private val branchTitle: TextView = view.findViewById(R.id.branch_title)
-    private val favoriteImage: ImageView = view.findViewById(R.id.ic_favorite_imageview)
-    // private val favoriteImageFill: ImageView = view.findViewById(R.id.ic_favorite_imageview_fill)
 
+    private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
     private val currentEventDateAndPlace: TextView =
             branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
     private val currentSpeakerName: TextView =
@@ -29,7 +25,9 @@ class BranchViewHolder(
             branchCurrentEvent.findViewById(R.id.event_speakers_job_textview)
     private val currentEventTitle: TextView =
             branchCurrentEvent.findViewById(R.id.event_title_textview)
+    private val favoriteImageCurrent: ImageView = branchCurrentEvent.findViewById(R.id.ic_favorite_imageview)
 
+    private val branchNextEvent: View = view.findViewById(R.id.branch_next_event)
     private val nextEventDateAndPlace: TextView =
             branchNextEvent.findViewById(R.id.event_date_and_place_textview)
     private val nextSpeakerName: TextView =
@@ -37,6 +35,7 @@ class BranchViewHolder(
     private val nextSpeakersJob: TextView =
             branchNextEvent.findViewById(R.id.event_speakers_job_textview)
     private val nextEventTitle: TextView = branchNextEvent.findViewById(R.id.event_title_textview)
+    private val favoriteImageNext: ImageView = branchNextEvent.findViewById(R.id.ic_favorite_imageview)
 
     // выключаем первый ивент
     init {
@@ -74,9 +73,16 @@ class BranchViewHolder(
 
     fun onClickListeners(branchApiData: BranchApiData) {
 
-        eventContainer.setOnClickListener {
+        branchCurrentEvent.setOnClickListener {
             branchApiData.events.first().title?.let { it1 ->
-                eventClickListener.onEventClickListener(
+                eventClickListener.onEventClickListenerCurrent(
+                        it1
+                )
+            }
+        }
+        branchNextEvent.setOnClickListener {
+            branchApiData.events.last().title?.let { it1 ->
+                eventClickListener.onEventClickListenerNext(
                         it1
                 )
             }
@@ -88,11 +94,11 @@ class BranchViewHolder(
                 )
             }
         }
-        favoriteImage.setOnClickListener {
-            eventClickListener.onFavoriteClickListener(
-                    favoriteImage,
-                    branchCurrentEvent.id.toString()
-            )
+        favoriteImageCurrent.setOnClickListener {
+            favoriteImageCurrent.setImageResource(R.drawable.ic_favorite_filled_imageview)
+        }
+        favoriteImageNext.setOnClickListener {
+            favoriteImageNext.setImageResource(R.drawable.ic_favorite_filled_imageview)
         }
     }
 }
