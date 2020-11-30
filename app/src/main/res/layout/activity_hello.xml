@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context = ".hello.presentation.HelloActivity"
-    >
-
-
+    tools:context=".hello.presentation.HelloActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -18,46 +14,43 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_helloscreen_bg"
+            android:layout_marginTop="@dimen/margin_size_16dp"
             android:scaleType="centerCrop"
-            android:layout_marginTop="@dimen/margin_size_16dp"/>
+            android:src="@drawable/ic_helloscreen_bg" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/ic_helloscreen_bg"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/ic_helloscreen_bg">
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_logo_white"
                 android:layout_gravity="top|center"
                 android:layout_marginTop="@dimen/margin_size_14dp"
-                />
-
+                android:src="@drawable/ic_logo_white" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_helloscreen_corona2_2"
                 android:layout_gravity="bottom|center"
-                />
+                android:src="@drawable/ic_helloscreen_corona2_2" />
         </LinearLayout>
     </FrameLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/what_is_name"
-        android:textSize="@dimen/acthello_texview_testsize_24sp"
-        android:textColor="@color/activity_hello_textview_color_grey"
-        android:textStyle="bold"
-        android:padding="@dimen/text_padding_10dp"
         android:layout_marginHorizontal="@dimen/margin_size_16dp"
+        android:layout_marginTop="@dimen/margin_size_16dp"
         android:layout_marginBottom="@dimen/margin_size_8dp"
-        android:layout_marginTop="@dimen/margin_size_16dp"/>
+        android:padding="@dimen/text_padding_10dp"
+        android:text="@string/what_is_name"
+        android:textColor="@color/activity_hello_textview_color_grey"
+        android:textSize="@dimen/acthello_texview_testsize_24sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/activity_main_name_edit_text"
@@ -65,26 +58,24 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_size_16dp"
         android:layout_marginVertical="@dimen/margin_size_8dp"
-        android:inputType="text"
-        android:padding="@dimen/text_padding_10dp"
         android:background="@drawable/bg_field_for_input_name"
-        android:hint="@string/enter_your_name"/>
+        android:hint="@string/enter_your_name"
+        android:inputType="text"
+        android:padding="@dimen/text_padding_10dp" />
 
     <Button
         android:id="@+id/activity_main_continue_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="@dimen/btn_textsize_16sp"
-        android:textColor="@color/continue_button_text_color"
-        android:textAllCaps="false"
-        android:padding="@dimen/text_padding_10dp"
-        android:text="@string/continue_btn"
         android:layout_marginHorizontal="@dimen/margin_size_16dp"
         android:layout_marginVertical="@dimen/margin_size_8dp"
         android:background="@drawable/bg_button"
         android:enabled="false"
-        />
-
+        android:padding="@dimen/text_padding_10dp"
+        android:text="@string/continue_btn"
+        android:textAllCaps="false"
+        android:textColor="@color/continue_button_text_color"
+        android:textSize="@dimen/btn_textsize_16sp" />
 
 </LinearLayout>
