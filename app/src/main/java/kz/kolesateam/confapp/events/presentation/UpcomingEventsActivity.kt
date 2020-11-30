@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,8 @@ import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.data.network.apiClient
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
-import kz.kolesateam.confapp.events.presentation.view.UpcomingClickListener
+import kz.kolesateam.confapp.events.presentation.view.gone
+import kz.kolesateam.confapp.events.presentation.view.show
 import kz.kolesateam.confapp.hello.presentation.APPLICATION_SHARED_PREFERENCES
 import kz.kolesateam.confapp.hello.presentation.USER_NAME_KEY
 import retrofit2.Call
@@ -35,18 +35,10 @@ class UpcomingEventsActivity : AppCompatActivity() {
         loadApiData()
     }
 
-    fun View.show() {
-        visibility = View.VISIBLE
-    }
-
-    fun View.gone() {
-        visibility = View.GONE
-    }
-
     fun saveUserName(): String {
         val sharedPreferences: SharedPreferences = getSharedPreferences(
-                APPLICATION_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
+            APPLICATION_SHARED_PREFERENCES,
+            Context.MODE_PRIVATE
         )
         return sharedPreferences.getString(USER_NAME_KEY, "User").toString()
     }
@@ -56,28 +48,27 @@ class UpcomingEventsActivity : AppCompatActivity() {
         apiClient.getUpcomingEvents().enqueue(object : Callback<List<BranchApiData>> {
 
             override fun onResponse(
-                    call: Call<List<BranchApiData>>,
-                    response: Response<List<BranchApiData>>
+                call: Call<List<BranchApiData>>,
+                response: Response<List<BranchApiData>>
             ) {
                 if (response.isSuccessful) {
                     val upcomingEventListItemList: MutableList<UpcomingEventListItem> =
-                            mutableListOf()
+                        mutableListOf()
                     val headerListItem: UpcomingEventListItem = UpcomingEventListItem(
-                            type = 1,
-                            data = getString(R.string.hello_user_fmt, saveUserName())
+                        type = 1,
+                        data = getString(R.string.hello_user_fmt, saveUserName())
                     )
                     // в response.body() лежит список branchApiData объектов
                     // создаем новый лист, переконвертируем в новый тип upComingEventListItem
                     val branchListItemList: List<UpcomingEventListItem> =
-                            response.body()!!.map { branchApiData ->
-                                UpcomingEventListItem(
-                                        type = 2,
-                                        data = branchApiData
-                                )
-                            }
+                        response.body()!!.map { branchApiData ->
+                            UpcomingEventListItem(
+                                type = 2,
+                                data = branchApiData
+                            )
+                        }
                     //сформировали новый список где первый - header
-                    upcomingEventListItemList.add(headerListItem)
-                    upcomingEventListItemList.addAll(branchListItemList)
+                    upcomingEventListItemList.addAll(listOf(headerListItem) + branchListItemList)
 
                     branchAdapter.setList(upcomingEventListItemList)
                     progressBar.gone()
@@ -85,8 +76,8 @@ class UpcomingEventsActivity : AppCompatActivity() {
             }
 
             override fun onFailure(
-                    call: Call<List<BranchApiData>>,
-                    t: Throwable
+                call: Call<List<BranchApiData>>,
+                t: Throwable
             ) {
                 responseTextView.text = t.localizedMessage
                 progressBar.gone()
@@ -99,47 +90,31 @@ class UpcomingEventsActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressbar)
         recyclerView.adapter = branchAdapter
         recyclerView.layoutManager = LinearLayoutManager(
-                this,
-                LinearLayoutManager.VERTICAL,
-                false,
+            this,
+            LinearLayoutManager.VERTICAL,
+            false,
         )
     }
 
     private fun getEventClickListener(): UpcomingClickListener = object : UpcomingClickListener {
-
-        override fun onBranchClickListener(branchTitle: String) {
+        override fun onBranchClick(title: String) {
             Toast.makeText(
-                    this@UpcomingEventsActivity,
-                    "Branch: $branchTitle", Toast.LENGTH_SHORT
+                this@UpcomingEventsActivity,
+                "Branch: $title", Toast.LENGTH_SHORT
             ).show()
         }
 
-        override fun onEventClickListenerCurrent(eventTitle: String) {
+        override fun onEventClick(title: String) {
             Toast.makeText(
-                    this@UpcomingEventsActivity,
-                    "Event Title: $eventTitle", Toast.LENGTH_SHORT
+                this@UpcomingEventsActivity,
+                "Event Title: $title", Toast.LENGTH_SHORT
             ).show()
         }
 
-
-        override fun onEventClickListenerNext(eventTitle: String) {
+        override fun onFavoriteClick() {
             Toast.makeText(
-                    this@UpcomingEventsActivity,
-                    "Event Title2: $eventTitle", Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        override fun onFavoriteClickListenerCurrent(image: ImageView, eventId: String) {
-            Toast.makeText(
-                    this@UpcomingEventsActivity,
-                    "нажато сердечко", Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        override fun onFavoriteClickListenerNext(image: ImageView, eventId: String) {
-            Toast.makeText(
-                    this@UpcomingEventsActivity,
-                    "нажато сердечко 2", Toast.LENGTH_SHORT
+                this@UpcomingEventsActivity,
+                "нажато сердечко", Toast.LENGTH_SHORT
             ).show()
         }
     }

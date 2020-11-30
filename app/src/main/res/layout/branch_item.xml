@@ -13,12 +13,12 @@
 
         <TextView
             android:id="@+id/branch_title"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/textview_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:text="@string/branch_title"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/branch_item_title_white"
             android:textSize="@dimen/acthello_texview_testsize_24sp"
             tools:ignore="InvalidId" />
 

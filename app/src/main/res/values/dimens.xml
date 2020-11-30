@@ -19,4 +19,7 @@
     <dimen name="margin_size_4dp">4dp</dimen>
     <dimen name="image_view_size_14dp">14dp</dimen>
     <dimen name="imageview_size_22dp">22dp</dimen>
+    <dimen name="btn_size_16dp">16dp</dimen>
+    <dimen name="textview_0dp">0dp</dimen>
+    <dimen name="textview_title_14sp">14sp</dimen>
 </resources>

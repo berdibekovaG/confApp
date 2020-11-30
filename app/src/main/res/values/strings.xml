@@ -8,7 +8,7 @@
     <string name="events_async_loading">Async loading</string>
     <string name="chosen">В избранное</string>
     <string name="branch_title">Branch title</string>
-    <string name="event_state">event state</string>
+    <string name="event_state">Следующий доклад</string>
     <string name="time">time</string>
     <string name="name_of_speaker">Name of speaker</string>
     <string name="speakers_job">Speakers job</string>
