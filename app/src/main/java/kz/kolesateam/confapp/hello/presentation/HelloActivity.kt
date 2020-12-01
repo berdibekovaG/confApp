@@ -1,21 +1,25 @@
 package kz.kolesateam.confapp.hello.presentation
 
-import android.content.Context
+
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.di.MEMORY_DATA_SOURCE
+import kz.kolesateam.confapp.events.data.dataSource.UserNameDataSource
 import kz.kolesateam.confapp.events.presentation.UpcomingEventsActivity
+import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
 
 private const val TAG = "HelloActivity"
 const val APPLICATION_SHARED_PREFERENCES = "Name"
-const val USER_NAME_KEY = "name"
 
 class HelloActivity : AppCompatActivity() {
+
+    private val userNameDataSource: UserNameDataSource by inject(named(MEMORY_DATA_SOURCE))
 
     private lateinit var nameEditText: EditText
 
@@ -28,7 +32,7 @@ class HelloActivity : AppCompatActivity() {
 
         findHalloButton.setOnClickListener {
             if (nameEditText.text.isNotBlank()) {
-                saveUserName()
+                saveUserName(nameEditText.text.toString().trim())
                 startingTestActivity()
             }
         }
@@ -40,14 +44,8 @@ class HelloActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveUserName() {
-        val sharedPreferences: SharedPreferences = getSharedPreferences(
-                APPLICATION_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-        )
-        val editor = sharedPreferences.edit()
-        editor.putString(USER_NAME_KEY, nameEditText.text.toString())
-        editor.apply()
+    private fun saveUserName(name: String) {
+        userNameDataSource.saveUserName(name)
     }
 
     private fun startingTestActivity() {

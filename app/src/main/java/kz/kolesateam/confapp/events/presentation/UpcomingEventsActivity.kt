@@ -8,25 +8,34 @@ import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.di.MEMORY_DATA_SOURCE
+import kz.kolesateam.confapp.events.data.dataSource.UserNameDataSource
 import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.data.network.apiClient
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
 import kz.kolesateam.confapp.events.presentation.view.gone
 import kz.kolesateam.confapp.events.presentation.view.show
-import kz.kolesateam.confapp.hello.presentation.APPLICATION_SHARED_PREFERENCES
-import kz.kolesateam.confapp.hello.presentation.USER_NAME_KEY
+import org.koin.android.ext.android.inject
+import org.koin.core.qualifier.named
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UpcomingEventsActivity : AppCompatActivity() {
+private const val DEFAULT_USER_NAME = "Гость"
+
+class UpcomingEventsActivity(
+) : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var responseTextView: TextView
     private lateinit var progressBar: ProgressBar
 
+
     private val branchAdapter: BranchAdapter = BranchAdapter(getEventClickListener())
+
+    private val userNameDataSource : UserNameDataSource by inject(named(MEMORY_DATA_SOURCE))
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +45,7 @@ class UpcomingEventsActivity : AppCompatActivity() {
     }
 
     fun saveUserName(): String {
-        val sharedPreferences: SharedPreferences = getSharedPreferences(
-            APPLICATION_SHARED_PREFERENCES,
-            Context.MODE_PRIVATE
-        )
-        return sharedPreferences.getString(USER_NAME_KEY, "User").toString()
+        return userNameDataSource.getUserName() ?: DEFAULT_USER_NAME
     }
 
     private fun loadApiData() {
