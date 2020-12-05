@@ -1,5 +1,6 @@
 package kz.kolesateam.confapp.events.presentation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -8,19 +9,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.allevents.presentation.AllEventsActivity
 import kz.kolesateam.confapp.di.UpcomingEventsViewModel
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Error
+
 
 class UpcomingEventsActivity(
 ) : AppCompatActivity() {
 
-    private  lateinit var upcomingEventsViewModule : UpcomingEventsViewModel
+    private val upcomingEventsViewModule : UpcomingEventsViewModel by viewModel()
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
 
@@ -29,7 +29,6 @@ class UpcomingEventsActivity(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upcoming_events)
-       upcomingEventsViewModule = getViewModel()
 
         bindViews()
 }
@@ -44,13 +43,13 @@ class UpcomingEventsActivity(
             false,
         )
         observeUpcomingEventsViewModule()
-        upcomingEventsViewModule?.onStart()
+        upcomingEventsViewModule.onStart()
     }
 
     private fun observeUpcomingEventsViewModule() {
-        upcomingEventsViewModule?.getProgressLiveData().observe(this,:: handleProgressBarState)
-        upcomingEventsViewModule?.geUpcomingEventLiveData().observe(this,:: showResult)
-        upcomingEventsViewModule?.getErrorEventLiveData().observe(this,::showError)
+        upcomingEventsViewModule.getProgressLiveData().observe(this,:: handleProgressBarState)
+        upcomingEventsViewModule.geUpcomingEventLiveData().observe(this,:: showResult)
+        upcomingEventsViewModule.getErrorEventLiveData().observe(this,::showError)
     }
 
     private fun showResult(upcomingEventList: List<UpcomingEventListItem>){
@@ -72,10 +71,7 @@ class UpcomingEventsActivity(
         }
 
         override fun onEventClick(title: String) {
-            Toast.makeText(
-                this@UpcomingEventsActivity,
-                "Event Title: $title", Toast.LENGTH_SHORT
-            ).show()
+            startingTestActivity()
         }
 
         override fun onFavoriteClick() {
@@ -88,5 +84,11 @@ class UpcomingEventsActivity(
     private fun handleProgressBarState(progressState: ProgressState)
     {
         progressBar.isVisible = progressState is ProgressState.Loading
+    }
+
+
+    private fun startingTestActivity() {
+        val intent = Intent(this, AllEventsActivity::class.java)
+        startActivity(intent)
     }
 }

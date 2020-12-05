@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/margin_size_16dp"
+
+    >
+    <include
+        layout="@layout/event_card_layout"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+
+        />
+
+</androidx.cardview.widget.CardView>

@@ -25,7 +25,8 @@
         android:padding="@dimen/bnt_padding_8dp"
         android:text="@string/chosen"
         android:textAllCaps="false"
-        android:textColor="#2A81DD" />
+        android:textColor="#2A81DD"
+        />
 
     <ProgressBar
         android:id="@+id/progressbar"

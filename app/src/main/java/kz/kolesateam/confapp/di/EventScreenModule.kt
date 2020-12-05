@@ -1,5 +1,8 @@
 package kz.kolesateam.confapp.di
 
+import kz.kolesateam.confapp.allevents.data.DefaultAllEventsRepository
+import kz.kolesateam.confapp.allevents.domain.AllEventsActivityRepository
+import kz.kolesateam.confapp.allevents.presentation.AllEventsActivity
 import kz.kolesateam.confapp.events.data.dataSource.UpcomingEventDataSource
 import kz.kolesateam.confapp.events.data.models.DefaultUpcomingEventsRepository
 import kz.kolesateam.confapp.events.domain.UpcomingEventsRepository
@@ -12,7 +15,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 
 private const val BASE_URL = " http://37.143.8.68:2020"
-const val DEFAULT_UPCOMING_EVENTS_REPOSITORY = "real_repository"
 
 val eventScreenModule: Module = module {
 
@@ -41,5 +43,10 @@ val eventScreenModule: Module = module {
         DefaultUpcomingEventsRepository(
             upcomingEventsDataSource = get()
         ) as UpcomingEventsRepository
+    }
+
+    factory { DefaultAllEventsRepository(
+        upcomingAllEventsDataSource = get()
+    ) as AllEventsActivityRepository
     }
 }
