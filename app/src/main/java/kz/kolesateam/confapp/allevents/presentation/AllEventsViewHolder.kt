@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.text.Layout
 import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.BranchApiData
@@ -17,7 +18,7 @@ class AllEventsViewHolder(
     private val allEVentsClickListener: UpcomingClickListener
 ): BaseViewHolder<EventApiData>(view) {
 
-       private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
+    private val branchCurrentEvent: View = view.findViewById(R.id.card_view)
     private val currentEventDateAndPlace: TextView =
         branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
     private val currentSpeakerName: TextView =

@@ -68,7 +68,6 @@ class AllEventsActivity: AppCompatActivity() {
     }
     private fun getEventClickListener(): UpcomingClickListener = object : UpcomingClickListener {
 
-
         override fun onBranchClick(title: String) {
             Toast.makeText(
                 this@AllEventsActivity,

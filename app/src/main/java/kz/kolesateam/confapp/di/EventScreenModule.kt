@@ -1,5 +1,6 @@
 package kz.kolesateam.confapp.di
 
+import kz.kolesateam.confapp.allevents.data.AllEventsDataSource
 import kz.kolesateam.confapp.allevents.data.DefaultAllEventsRepository
 import kz.kolesateam.confapp.allevents.domain.AllEventsActivityRepository
 import kz.kolesateam.confapp.allevents.presentation.AllEventsActivity
@@ -36,6 +37,17 @@ val eventScreenModule: Module = module {
         val retrofit: Retrofit = get()
 
         retrofit.create(UpcomingEventDataSource::class.java)
+    }
+    viewModel {
+        AllEventsViewModel(
+                allEventsActivityRepository = get(),
+                userNameDataSource = get(named(MEMORY_DATA_SOURCE))
+        )
+    }
+    single {
+        val retrofit: Retrofit = get()
+
+        retrofit.create(AllEventsDataSource::class.java)
     }
 
 
