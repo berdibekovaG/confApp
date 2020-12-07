@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".events.presentation.UpcomingEventsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,8 +24,9 @@
             tools:ignore="InvalidId" />
 
         <ImageView
+            android:id="@+id/btn_next_event"
             android:layout_width="@dimen/imageview_32dp"
-            android:layout_height="@dimen/imageview_32dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:padding="@dimen/padding_4dp"
             android:src="@drawable/ic_arrow_forward" />

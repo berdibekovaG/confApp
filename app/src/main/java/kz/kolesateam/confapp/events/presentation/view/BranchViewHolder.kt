@@ -51,7 +51,7 @@ class BranchViewHolder(
             currentEvent.endTime,
             currentEvent.place,
         )
-        onClickListeners(branchApiData)
+        initOnClickListeners(branchApiData)
 
         currentEventDateAndPlace.text = currentEventDateAndPlaceText
         currentSpeakerName.text = currentEvent.speaker?.fullName ?: "noname"
@@ -70,7 +70,7 @@ class BranchViewHolder(
         nextEventTitle.text = nextEvent.title
     }
 
-    fun onClickListeners(branchApiData: BranchApiData) {
+    fun initOnClickListeners(branchApiData: BranchApiData) {
 
         branchCurrentEvent.setOnClickListener {
             branchApiData.events.first().title?.let { it1 ->

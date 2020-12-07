@@ -16,14 +16,14 @@ import kz.kolesateam.confapp.events.data.models.ResponseData
 class AllEventsViewModel(
     private val allEventsActivityRepository: AllEventsActivityRepository,
     private val userNameDataSource: UserNameDataSource
-):ViewModel() {
+) : ViewModel() {
 
     private val progressLiveData: MutableLiveData<ProgressState> = MutableLiveData()
     private val allUpcomingEventLiveData: MutableLiveData<List<EventApiData>> =
         MutableLiveData()
 
-    fun getProgressLiveData() : LiveData<ProgressState> = progressLiveData
-    fun getAllUpcomingEventLiveData() : LiveData<List<EventApiData>> = allUpcomingEventLiveData
+    fun getProgressLiveData(): LiveData<ProgressState> = progressLiveData
+    fun getAllUpcomingEventLiveData(): LiveData<List<EventApiData>> = allUpcomingEventLiveData
 
     fun onStart() {
         getAllEvents()
@@ -38,7 +38,6 @@ class AllEventsViewModel(
                 withContext(Dispatchers.IO) {
                     allEventsActivityRepository.getAllEvents()
                 }
-
             when (response) {
                 is ResponseData.Success -> allUpcomingEventLiveData.value = response.result
                 is ResponseData.Error -> println(response.error)
@@ -46,5 +45,4 @@ class AllEventsViewModel(
             progressLiveData.value = ProgressState.Done
         }
     }
-
-    }
+}

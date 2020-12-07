@@ -14,7 +14,7 @@ import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllEventsActivity: AppCompatActivity() {
+class AllEventsActivity : AppCompatActivity() {
 
     private val allEventsViewModel: AllEventsViewModel by viewModel()
     private val allEventsAdapter = AllEventsAdapter(getEventClickListener())
@@ -23,14 +23,10 @@ class AllEventsActivity: AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var favoritesButton: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_events)
         bindViews()
-
-//        favoritesButton.setOnClickListener {
-//        }
 
         val branchId: Int = intent.getIntExtra("branch_id", 0)
         observeAllEventsViewModel()
@@ -48,8 +44,6 @@ class AllEventsActivity: AppCompatActivity() {
         )
         observeAllEventsViewModel()
         allEventsViewModel.onStart()
-
-
     }
 
     private fun observeAllEventsViewModel() {
@@ -66,6 +60,7 @@ class AllEventsActivity: AppCompatActivity() {
     ) {
         progressBar.isVisible = progressState is ProgressState.Loading
     }
+
     private fun getEventClickListener(): UpcomingClickListener = object : UpcomingClickListener {
 
         override fun onBranchClick(title: String) {
@@ -75,14 +70,9 @@ class AllEventsActivity: AppCompatActivity() {
             ).show()
         }
 
-        override fun onEventClick(title: String) {
+        override fun onEventClick(title: String) {}
 
-        }
-
-        override fun onFavoriteClick() {
-
-        }
-
+        override fun onFavoriteClick() {}
     }
 }
 

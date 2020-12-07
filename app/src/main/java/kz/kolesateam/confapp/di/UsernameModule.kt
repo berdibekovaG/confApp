@@ -8,7 +8,6 @@ import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-//два ключа чтобы понимать какой возвращается при запросе у коина
  const val SHARED_PREFS_DATA_SOURCE = "shared_prefs_data_source"
  const val MEMORY_DATA_SOURCE = "memory_data_source"
 

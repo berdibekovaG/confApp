@@ -22,4 +22,7 @@
     <dimen name="btn_size_16dp">16dp</dimen>
     <dimen name="textview_0dp">0dp</dimen>
     <dimen name="textview_title_14sp">14sp</dimen>
+    <dimen name="padding_24dp">24dp</dimen>
+    <dimen name="padding_63dp">63dp</dimen>
+    <dimen name="btn_154dp">154dp</dimen>
 </resources>

@@ -1,16 +1,11 @@
 package kz.kolesateam.confapp.allevents.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
-import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.EventApiData
-import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
-import kz.kolesateam.confapp.events.presentation.view.BranchViewHolder
-import kz.kolesateam.confapp.events.presentation.view.HeadVIewHolder
 
 class AllEventsAdapter(
    private val allEventsClickListeners: UpcomingClickListener

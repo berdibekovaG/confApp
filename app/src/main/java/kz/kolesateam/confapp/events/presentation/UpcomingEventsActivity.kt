@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
@@ -15,7 +14,6 @@ import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class UpcomingEventsActivity(
 ) : AppCompatActivity() {
@@ -64,14 +62,14 @@ class UpcomingEventsActivity(
 
     private fun getEventClickListener(): UpcomingClickListener = object : UpcomingClickListener {
         override fun onBranchClick(title: String) {
+            startingAllEventsActivity()
+        }
+
+        override fun onEventClick(title: String) {
             Toast.makeText(
                 this@UpcomingEventsActivity,
                 "Branch: $title", Toast.LENGTH_SHORT
             ).show()
-        }
-
-        override fun onEventClick(title: String) {
-            startingTestActivity()
         }
 
         override fun onFavoriteClick() {
@@ -86,8 +84,7 @@ class UpcomingEventsActivity(
         progressBar.isVisible = progressState is ProgressState.Loading
     }
 
-
-    private fun startingTestActivity() {
+    private fun startingAllEventsActivity() {
         val intent = Intent(this, AllEventsActivity::class.java)
         startActivity(intent)
     }

@@ -22,5 +22,6 @@
     <color name="textview_title_text_black">#1C1819</color>
     <color name="textview_textcolor_grey">#888B94</color>
     <color name="branch_item_title_white">#FFFFFF</color>
+    <color name="text_color_blue">#2A81DD</color>
 
 </resources>

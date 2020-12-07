@@ -25,9 +25,9 @@ class UpcomingEventsViewModel(
         MutableLiveData()
     private val errorEventLiveData: MutableLiveData<Exception> = MutableLiveData()
 
-    fun getProgressLiveData() : LiveData<ProgressState> = progressLiveData
-    fun geUpcomingEventLiveData() : LiveData<List<UpcomingEventListItem>> = upcomingEventLiveData
-    fun getErrorEventLiveData() : LiveData<Exception> = errorEventLiveData
+    fun getProgressLiveData(): LiveData<ProgressState> = progressLiveData
+    fun geUpcomingEventLiveData(): LiveData<List<UpcomingEventListItem>> = upcomingEventLiveData
+    fun getErrorEventLiveData(): LiveData<Exception> = errorEventLiveData
 
     fun onStart() {
         getUpcomingEvents()
@@ -57,23 +57,21 @@ class UpcomingEventsViewModel(
 
     private fun prepareUpcomingEventsList(
         upcomingEvents: List<UpcomingEventListItem>
-    ):
-            List<UpcomingEventListItem> {
+    ): List<UpcomingEventListItem> {
 
         val upcomingEventListItemList: MutableList<UpcomingEventListItem> =
             mutableListOf()
         val headerListItem: UpcomingEventListItem = UpcomingEventListItem(
             type = 1,
-        data = getUserName()
+            data = getUserName()
         )
         //сформировали новый список где первый - header
         upcomingEventListItemList.addAll(listOf(headerListItem) + upcomingEvents)
 
         return upcomingEventListItemList
     }
-
-    private fun getUserName(): String{
-        return userNameDataSource.getUserName()?: DEFAULT_USER_NAME
+    private fun getUserName(): String {
+        return userNameDataSource.getUserName() ?: DEFAULT_USER_NAME
     }
 }
 

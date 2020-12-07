@@ -3,11 +3,9 @@ package kz.kolesateam.confapp.di
 import kz.kolesateam.confapp.allevents.data.AllEventsDataSource
 import kz.kolesateam.confapp.allevents.data.DefaultAllEventsRepository
 import kz.kolesateam.confapp.allevents.domain.AllEventsActivityRepository
-import kz.kolesateam.confapp.allevents.presentation.AllEventsActivity
 import kz.kolesateam.confapp.events.data.dataSource.UpcomingEventDataSource
 import kz.kolesateam.confapp.events.data.models.DefaultUpcomingEventsRepository
 import kz.kolesateam.confapp.events.domain.UpcomingEventsRepository
-import kz.kolesateam.confapp.events.presentation.UpcomingEventsActivity
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.core.qualifier.named
@@ -19,12 +17,12 @@ private const val BASE_URL = " http://37.143.8.68:2020"
 
 val eventScreenModule: Module = module {
 
-        viewModel {
-            UpcomingEventsViewModel(
-                upcomingEventsRepository = get(),
-                userNameDataSource = get(named(MEMORY_DATA_SOURCE))
-            )
-        }
+    viewModel {
+        UpcomingEventsViewModel(
+            upcomingEventsRepository = get(),
+            userNameDataSource = get(named(MEMORY_DATA_SOURCE))
+        )
+    }
 
     single {
         Retrofit.Builder()
@@ -40,8 +38,8 @@ val eventScreenModule: Module = module {
     }
     viewModel {
         AllEventsViewModel(
-                allEventsActivityRepository = get(),
-                userNameDataSource = get(named(MEMORY_DATA_SOURCE))
+            allEventsActivityRepository = get(),
+            userNameDataSource = get(named(MEMORY_DATA_SOURCE))
         )
     }
     single {
@@ -50,15 +48,15 @@ val eventScreenModule: Module = module {
         retrofit.create(AllEventsDataSource::class.java)
     }
 
-
     factory() {
         DefaultUpcomingEventsRepository(
             upcomingEventsDataSource = get()
         ) as UpcomingEventsRepository
     }
 
-    factory { DefaultAllEventsRepository(
-        upcomingAllEventsDataSource = get()
-    ) as AllEventsActivityRepository
+    factory {
+        DefaultAllEventsRepository(
+            upcomingAllEventsDataSource = get()
+        ) as AllEventsActivityRepository
     }
 }

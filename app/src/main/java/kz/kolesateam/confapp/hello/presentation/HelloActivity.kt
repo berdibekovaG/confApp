@@ -7,19 +7,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
-import kz.kolesateam.confapp.ConfAppApplication
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.di.MEMORY_DATA_SOURCE
 import kz.kolesateam.confapp.events.data.dataSource.UserNameDataSource
 import kz.kolesateam.confapp.events.presentation.UpcomingEventsActivity
 import org.koin.android.ext.android.inject
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
-
-private const val TAG = "HelloActivity"
-const val APPLICATION_SHARED_PREFERENCES = "Name"
 
 class HelloActivity : AppCompatActivity() {
 
@@ -46,7 +39,6 @@ class HelloActivity : AppCompatActivity() {
                 findHalloButton.isEnabled = text.isNotBlank()
             }
         }
-
     }
 
     private fun saveUserName(name: String) {
