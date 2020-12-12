@@ -1,7 +1,6 @@
 package kz.kolesateam.confapp.allevents.presentation
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.di.AllEventsViewModel
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
+import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllEventsActivity : AppCompatActivity() {
@@ -19,34 +19,33 @@ class AllEventsActivity : AppCompatActivity() {
     private val allEventsViewModel: AllEventsViewModel by viewModel()
     private val allEventsAdapter = AllEventsAdapter(getEventClickListener())
 
+    private val branchAdapter: BranchAdapter = BranchAdapter(getEventClickListener())
+
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
-    private lateinit var favoritesButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_events)
+
         bindViews()
 
-        val branchId: Int = intent.getIntExtra("branch_id", 0)
-        observeAllEventsViewModel()
-        allEventsViewModel.onStart()
+        //val branchId: Int = intent.getIntExtra("branch_id", 0)
     }
 
     private fun bindViews() {
         recyclerView = findViewById(R.id.activity_all_events_recycler_view)
         progressBar = findViewById(R.id.progressbar)
         recyclerView.adapter = allEventsAdapter
-        recyclerView.layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.VERTICAL,
-            false,
-        )
+        recyclerView.layoutManager = LinearLayoutManager(this)
         observeAllEventsViewModel()
         allEventsViewModel.onStart()
     }
 
     private fun observeAllEventsViewModel() {
+
+        allEventsViewModel.getProgressLiveData().observe(this, ::handleProgressBarState)
+
         allEventsViewModel.getProgressLiveData().observe(this, {
             handleProgressBarState(it)
         })
@@ -56,7 +55,7 @@ class AllEventsActivity : AppCompatActivity() {
     }
 
     private fun handleProgressBarState(
-        progressState: ProgressState
+            progressState: ProgressState
     ) {
         progressBar.isVisible = progressState is ProgressState.Loading
     }
@@ -65,14 +64,25 @@ class AllEventsActivity : AppCompatActivity() {
 
         override fun onBranchClick(title: String) {
             Toast.makeText(
-                this@AllEventsActivity,
-                "Branch: $title", Toast.LENGTH_SHORT
+                    this@AllEventsActivity,
+                    "Branch: $title", Toast.LENGTH_SHORT
             ).show()
         }
 
-        override fun onEventClick(title: String) {}
+        override fun onEventClick(title: String) {
+            Toast.makeText(
+                    this@AllEventsActivity,
+                    "Branch: $title", Toast.LENGTH_SHORT
+            ).show()
+        }
 
-        override fun onFavoriteClick() {}
+        override fun onFavoriteClick() {
+            Toast.makeText(
+                    this@AllEventsActivity,
+                    "нажато сердечко", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
+
 

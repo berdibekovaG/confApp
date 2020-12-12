@@ -36,6 +36,7 @@ class BranchViewHolder(
         branchNextEvent.findViewById(R.id.event_speakers_job_textview)
     private val nextEventTitle: TextView = branchNextEvent.findViewById(R.id.event_title_textview)
 
+
     // выключаем первый ивент
     init {
         branchCurrentEvent.findViewById<TextView>(R.id.event_state_textview).visibility =

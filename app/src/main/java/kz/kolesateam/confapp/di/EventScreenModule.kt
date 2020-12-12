@@ -39,7 +39,7 @@ val eventScreenModule: Module = module {
     viewModel {
         AllEventsViewModel(
             allEventsActivityRepository = get(),
-            userNameDataSource = get(named(MEMORY_DATA_SOURCE))
+           // userNameDataSource = get(named(MEMORY_DATA_SOURCE))
         )
     }
     single {

@@ -12,10 +12,11 @@
         android:background="@drawable/bg_upcoming_events"
         android:orientation="vertical">
 
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/ToolbarTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,7 @@
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/padding_24dp"
-            android:paddingBottom="@dimen/padding_63dp"
+            android:paddingBottom="@dimen/padding_72dp"
             android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/all_branch_item" />

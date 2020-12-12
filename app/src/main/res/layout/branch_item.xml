@@ -14,23 +14,15 @@
 
         <TextView
             android:id="@+id/branch_title"
-            android:layout_width="@dimen/textview_0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
+            android:drawableRight="@drawable/ic_arrow_forward"
+            android:paddingBottom="@dimen/padding_16dp"
             android:text="@string/branch_title"
             android:textColor="@color/branch_item_title_white"
             android:textSize="@dimen/acthello_texview_testsize_24sp"
+            android:visibility="visible"
             tools:ignore="InvalidId" />
-
-        <ImageView
-            android:id="@+id/btn_next_event"
-            android:layout_width="@dimen/imageview_32dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:padding="@dimen/padding_4dp"
-            android:src="@drawable/ic_arrow_forward" />
-
     </LinearLayout>
 
     <HorizontalScrollView

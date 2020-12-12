@@ -35,11 +35,7 @@ class UpcomingEventsActivity(
         recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
         progressBar = findViewById(R.id.progressbar)
         recyclerView.adapter = branchAdapter
-        recyclerView.layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.VERTICAL,
-            false,
-        )
+        recyclerView.layoutManager = LinearLayoutManager(this)
         observeUpcomingEventsViewModule()
         upcomingEventsViewModule.onStart()
     }

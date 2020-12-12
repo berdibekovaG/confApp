@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/margin_size_16dp"
+    android:paddingHorizontal="@dimen/padding_16dp"
+    android:paddingTop="@dimen/padding_4dp"
+    android:paddingBottom="@dimen/padding_16dp">
 
-    >
     <include
         layout="@layout/event_card_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
 </androidx.cardview.widget.CardView>

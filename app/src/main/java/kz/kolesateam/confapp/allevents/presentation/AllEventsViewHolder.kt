@@ -34,7 +34,5 @@ class AllEventsViewHolder(
         currentSpeakerName.text = data.speaker?.fullName ?: "noname"
         currentSpeakersJob.text = data.speaker?.job
         currentEventTitle.text = data.title
-
-
     }
 }

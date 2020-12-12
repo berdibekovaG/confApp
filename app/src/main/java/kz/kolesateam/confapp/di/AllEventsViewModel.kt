@@ -8,19 +8,16 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kz.kolesateam.confapp.allevents.domain.AllEventsActivityRepository
-import kz.kolesateam.confapp.events.data.dataSource.UserNameDataSource
 import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.ResponseData
 
 class AllEventsViewModel(
     private val allEventsActivityRepository: AllEventsActivityRepository,
-    private val userNameDataSource: UserNameDataSource
 ) : ViewModel() {
 
     private val progressLiveData: MutableLiveData<ProgressState> = MutableLiveData()
-    private val allUpcomingEventLiveData: MutableLiveData<List<EventApiData>> =
-        MutableLiveData()
+    private val allUpcomingEventLiveData: MutableLiveData<List<EventApiData>> = MutableLiveData()
 
     fun getProgressLiveData(): LiveData<ProgressState> = progressLiveData
     fun getAllUpcomingEventLiveData(): LiveData<List<EventApiData>> = allUpcomingEventLiveData

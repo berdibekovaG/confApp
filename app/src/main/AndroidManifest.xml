@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConfApp"
+
+
+
         android:usesCleartextTraffic="true">
-        <activity android:name=".allevents.presentation.AllEventsActivity"/>
+        <activity android:name=".allevents.presentation.AllEventsActivity" />
         <activity android:name=".events.presentation.UpcomingEventsActivity" />
         <activity android:name=".hello.presentation.HelloActivity">
             <intent-filter>
