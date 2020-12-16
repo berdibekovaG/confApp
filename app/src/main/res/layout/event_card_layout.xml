@@ -33,13 +33,11 @@
         app:layout_constraintRight_toLeftOf="@id/ic_favorite_imageview"
         app:layout_constraintTop_toBottomOf="@id/event_state_textview" />
 
-    <ToggleButton
+    <ImageView
         android:id="@+id/ic_favorite_imageview"
         android:layout_width="@dimen/btn_size_16dp"
         android:layout_height="@dimen/image_view_size_14dp"
-        android:background="@drawable/selector_favorite_btn"
-        android:textOff=""
-        android:textOn=""
+        android:src="@drawable/ic_favorite_border"
         app:layout_constraintBottom_toBottomOf="@id/event_date_and_place_textview"
         app:layout_constraintLeft_toRightOf="@id/event_date_and_place_textview"
         app:layout_constraintRight_toRightOf="parent"

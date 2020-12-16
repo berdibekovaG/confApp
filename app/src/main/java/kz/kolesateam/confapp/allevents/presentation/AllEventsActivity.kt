@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.di.AllEventsViewModel
+import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
@@ -76,7 +77,11 @@ class AllEventsActivity : AppCompatActivity() {
             ).show()
         }
 
-        override fun onFavoriteClick() {
+        override fun onFavoriteClick(eventTitle: EventApiData) {
+
+        }
+
+        override fun onFavoriteClick(title: Unit) {
             Toast.makeText(
                     this@AllEventsActivity,
                     "нажато сердечко", Toast.LENGTH_SHORT

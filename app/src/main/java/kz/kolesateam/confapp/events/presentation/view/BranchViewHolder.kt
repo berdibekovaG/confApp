@@ -1,6 +1,7 @@
 package kz.kolesateam.confapp.events.presentation.view
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
@@ -15,6 +16,9 @@ class BranchViewHolder(
     private val eventClickListener: UpcomingClickListener,
 ) : RecyclerView.ViewHolder(view) {
 
+    private lateinit var currentEvent: EventApiData
+    private lateinit var nextEvent: EventApiData
+
     private val branchTitle: TextView = view.findViewById(R.id.branch_title)
 
     private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
@@ -26,6 +30,7 @@ class BranchViewHolder(
         branchCurrentEvent.findViewById(R.id.event_speakers_job_textview)
     private val currentEventTitle: TextView =
         branchCurrentEvent.findViewById(R.id.event_title_textview)
+    private val currentFavoriteView: ImageView = branchCurrentEvent.findViewById(R.id.ic_favorite_imageview)
 
     private val branchNextEvent: View = view.findViewById(R.id.branch_next_event)
     private val nextEventDateAndPlace: TextView =
@@ -35,6 +40,7 @@ class BranchViewHolder(
     private val nextSpeakersJob: TextView =
         branchNextEvent.findViewById(R.id.event_speakers_job_textview)
     private val nextEventTitle: TextView = branchNextEvent.findViewById(R.id.event_title_textview)
+    private val nextFavoriteView: ImageView = branchNextEvent.findViewById(R.id.ic_favorite_imageview)
 
 
     // выключаем первый ивент
@@ -45,21 +51,29 @@ class BranchViewHolder(
 
     fun onBind(branchApiData: BranchApiData) {
         branchTitle.text = branchApiData.title
-        val currentEvent: EventApiData = branchApiData.events.first()
+
+        if(branchApiData.events.isEmpty()){
+            branchCurrentEvent.visibility = View.GONE
+            branchNextEvent.visibility =View.GONE
+
+            return
+        }
+
+       currentEvent = branchApiData.events.first()
 
         val currentEventDateAndPlaceText = TIME_AND_PLACE_FORMAT.format(
             currentEvent.startTime,
             currentEvent.endTime,
             currentEvent.place,
         )
-        initOnClickListeners(branchApiData)
+        initOnClickListeners(currentEvent, nextEvent, branchApiData)
 
         currentEventDateAndPlace.text = currentEventDateAndPlaceText
         currentSpeakerName.text = currentEvent.speaker?.fullName ?: "noname"
         currentSpeakersJob.text = currentEvent.speaker?.job
         currentEventTitle.text = currentEvent.title
 
-        val nextEvent: EventApiData = branchApiData.events.last()
+        nextEvent = branchApiData.events.last()
         val nextEventDateAndPlaceText = TIME_AND_PLACE_FORMAT.format(
             nextEvent.startTime,
             nextEvent.endTime,
@@ -71,7 +85,10 @@ class BranchViewHolder(
         nextEventTitle.text = nextEvent.title
     }
 
-    fun initOnClickListeners(branchApiData: BranchApiData) {
+    fun initOnClickListeners(
+        currentEvent: EventApiData,
+        nextEvent: EventApiData,
+        branchApiData: BranchApiData) {
 
         branchCurrentEvent.setOnClickListener {
             branchApiData.events.first().title?.let { it1 ->
@@ -93,6 +110,23 @@ class BranchViewHolder(
                     it1
                 )
             }
+        }
+        currentFavoriteView.setOnClickListener{
+            currentEvent.isFavorite = !currentEvent.isFavorite
+            currentFavoriteView.setImageResource(R.drawable.ic_favorite_filled_imageview)
+            eventClickListener.onFavoriteClick(
+            eventClickListener.onFavoriteClick(currentEvent)
+            )
+        }
+
+
+        nextFavoriteView.setOnClickListener{
+            nextEvent.isFavorite = !nextEvent.isFavorite
+            nextFavoriteView.setImageResource(R.drawable.ic_favorite_filled_imageview)
+            eventClickListener.onFavoriteClick(
+                eventClickListener.onFavoriteClick(currentEvent)
+
+            )
         }
     }
 }

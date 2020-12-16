@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.allevents.presentation.AllEventsActivity
 import kz.kolesateam.confapp.di.UpcomingEventsViewModel
+import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
@@ -68,7 +69,14 @@ class UpcomingEventsActivity(
             ).show()
         }
 
-        override fun onFavoriteClick() {
+        override fun onFavoriteClick(eventTitle: EventApiData) {
+            Toast.makeText(
+                this@UpcomingEventsActivity,
+                "нажато сердечко", Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        override fun onFavoriteClick(eventTitle: Unit) {
             Toast.makeText(
                 this@UpcomingEventsActivity,
                 "нажато сердечко", Toast.LENGTH_SHORT
