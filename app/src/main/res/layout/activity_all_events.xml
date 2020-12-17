@@ -20,6 +20,7 @@
             android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
+
             android:id="@+id/activity_all_events_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +34,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_favorite"
+        android:id="@+id/upcoming_events_button_favorite"
         style="@style/FavoriteButton" />
 
     <ProgressBar

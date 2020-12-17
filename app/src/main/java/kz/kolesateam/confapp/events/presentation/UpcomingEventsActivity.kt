@@ -14,6 +14,7 @@ import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
+import kz.kolesateam.confapp.favorite_events.presentation.FavoriteEventsActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpcomingEventsActivity(
@@ -33,6 +34,10 @@ class UpcomingEventsActivity(
 }
 
     private fun bindViews() {
+        val favoritesButton: Button = findViewById(R.id.upcoming_events_button_favorite)
+        favoritesButton.setOnClickListener{
+            startActivity(Intent(this, FavoriteEventsActivity:: class.java))
+        }
         recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
         progressBar = findViewById(R.id.progressbar)
         recyclerView.adapter = branchAdapter

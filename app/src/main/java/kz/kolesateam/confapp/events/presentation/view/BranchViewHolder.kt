@@ -59,6 +59,7 @@ class BranchViewHolder(
             return
         }
 
+
        currentEvent = branchApiData.events.first()
 
         val currentEventDateAndPlaceText = TIME_AND_PLACE_FORMAT.format(
@@ -66,7 +67,6 @@ class BranchViewHolder(
             currentEvent.endTime,
             currentEvent.place,
         )
-        initOnClickListeners(branchApiData)
 
         currentEventDateAndPlace.text = currentEventDateAndPlaceText
         currentSpeakerName.text = currentEvent.speaker?.fullName ?: "noname"
@@ -83,12 +83,13 @@ class BranchViewHolder(
         nextSpeakerName.text = nextEvent.speaker?.fullName ?: "noname"
         nextSpeakersJob.text = nextEvent.speaker?.job
         nextEventTitle.text = nextEvent.title
+
+        initOnClickListeners(currentEvent, nextEvent, branchApiData)
     }
 
     fun initOnClickListeners(
         currentEvent: EventApiData,
         nextEvent: EventApiData,
-
         branchApiData: BranchApiData) {
 
         branchCurrentEvent.setOnClickListener {

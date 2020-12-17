@@ -15,18 +15,8 @@
         tools:listitem="@layout/branch_item" />
 
     <Button
-        android:layout_width="@dimen/btn_154dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="@dimen/margin_size_16dp"
-        android:background="@drawable/bg_to_favorite_button"
-        android:drawableLeft="@drawable/ic_favorite_border"
-        android:drawablePadding="@dimen/padding_4dp"
-        android:padding="@dimen/bnt_padding_8dp"
-        android:text="@string/chosen"
-        android:textAllCaps="false"
-        android:textColor="@color/text_color_blue"
-        />
+        android:id="@+id/upcoming_events_button_favorite"
+        style="@style/FavoriteButton" />
 
     <ProgressBar
         android:id="@+id/progressbar"
