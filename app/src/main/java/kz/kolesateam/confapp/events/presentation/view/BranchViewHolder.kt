@@ -66,7 +66,7 @@ class BranchViewHolder(
             currentEvent.endTime,
             currentEvent.place,
         )
-        initOnClickListeners(currentEvent, nextEvent, branchApiData)
+        initOnClickListeners(branchApiData)
 
         currentEventDateAndPlace.text = currentEventDateAndPlaceText
         currentSpeakerName.text = currentEvent.speaker?.fullName ?: "noname"
@@ -88,6 +88,7 @@ class BranchViewHolder(
     fun initOnClickListeners(
         currentEvent: EventApiData,
         nextEvent: EventApiData,
+
         branchApiData: BranchApiData) {
 
         branchCurrentEvent.setOnClickListener {
@@ -113,8 +114,12 @@ class BranchViewHolder(
         }
         currentFavoriteView.setOnClickListener{
             currentEvent.isFavorite = !currentEvent.isFavorite
-            currentFavoriteView.setImageResource(R.drawable.ic_favorite_filled_imageview)
+
+            val favoriteImageResource= getFavoriteImageResource(currentEvent.isFavorite)
+            currentFavoriteView.setImageResource(favoriteImageResource)
+
             eventClickListener.onFavoriteClick(
+
             eventClickListener.onFavoriteClick(currentEvent)
             )
         }
@@ -122,12 +127,19 @@ class BranchViewHolder(
 
         nextFavoriteView.setOnClickListener{
             nextEvent.isFavorite = !nextEvent.isFavorite
-            nextFavoriteView.setImageResource(R.drawable.ic_favorite_filled_imageview)
+
+            val favoriteImageResource= getFavoriteImageResource(nextEvent.isFavorite)
+            nextFavoriteView.setImageResource(favoriteImageResource)
             eventClickListener.onFavoriteClick(
                 eventClickListener.onFavoriteClick(currentEvent)
 
             )
         }
+    }
+
+    private fun getFavoriteImageResource(isFavorite: Boolean): Int = when(isFavorite){
+        true -> R.drawable.ic_favorite_filled_imageview
+        else -> R.drawable.ic_favorite_border
     }
 }
 

@@ -20,7 +20,8 @@ val eventScreenModule: Module = module {
     viewModel {
         UpcomingEventsViewModel(
             upcomingEventsRepository = get(),
-            userNameDataSource = get(named(MEMORY_DATA_SOURCE))
+            userNameDataSource = get(named(MEMORY_DATA_SOURCE)),
+                favoriteEventsRepository = get()
         )
     }
 

@@ -8,15 +8,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kz.kolesateam.confapp.events.data.dataSource.UserNameDataSource
+import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.ResponseData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.domain.UpcomingEventsRepository
+import kz.kolesateam.confapp.favorite_events.domain.FavoriteEventsRepository
 
 private const val DEFAULT_USER_NAME = "Гость"
 
 class UpcomingEventsViewModel(
     private val upcomingEventsRepository: UpcomingEventsRepository,
+    private val favoriteEventsRepository: FavoriteEventsRepository,
     private val userNameDataSource: UserNameDataSource
 ) : ViewModel() {
 
@@ -31,6 +34,14 @@ class UpcomingEventsViewModel(
 
     fun onStart() {
         getUpcomingEvents()
+    }
+
+    fun onFavoriteClick(eventData: EventApiData)
+    {
+        when(eventData.isFavorite){
+            true-> favoriteEventsRepository.saveFavoriteEvent(eventData)
+            else -> favoriteEventsRepository.removeFavoriteEvent(eventId = eventData.id)
+        }
     }
 
     private fun getUpcomingEvents() {

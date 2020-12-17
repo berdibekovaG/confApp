@@ -69,7 +69,9 @@ class UpcomingEventsActivity(
             ).show()
         }
 
-        override fun onFavoriteClick(eventTitle: EventApiData) {
+        override fun onFavoriteClick(eventData: EventApiData) {
+            upcomingEventsViewModule.onFavoriteClick(eventData)
+
             Toast.makeText(
                 this@UpcomingEventsActivity,
                 "нажато сердечко", Toast.LENGTH_SHORT
@@ -77,6 +79,8 @@ class UpcomingEventsActivity(
         }
 
         override fun onFavoriteClick(eventTitle: Unit) {
+
+
             Toast.makeText(
                 this@UpcomingEventsActivity,
                 "нажато сердечко", Toast.LENGTH_SHORT

@@ -14,7 +14,7 @@ class DefaultFavoriteEventsRepository: FavoriteEventsRepository {
         favoriteEvents[eventApiData.id] = eventApiData
     }
 
-    override fun removeFavoriteEvent(eventId: Int) {
+    override fun removeFavoriteEvent(eventId: Int?) {
         favoriteEvents.remove(eventId)
     }
 
