@@ -9,7 +9,8 @@ val favoriteEventsModule: org.koin.core.module.Module = module {
 
     single {
         DefaultFavoriteEventsRepository(
-            context = androidApplication()
+                context = androidApplication(),
+                objectMapper = get()
         ) as FavoriteEventsRepository
     }
 }

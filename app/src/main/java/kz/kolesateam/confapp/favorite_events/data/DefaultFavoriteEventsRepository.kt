@@ -17,15 +17,19 @@ class DefaultFavoriteEventsRepository(
     private val objectMapper: ObjectMapper
 ) : FavoriteEventsRepository {
 
-    private val favoriteEvents: MutableMap<Int, EventApiData>? = null
+    private var favoriteEvents: MutableMap<Int, EventApiData> = mutableMapOf()
+
+    init{
+        val favoriteEventsFromFile: Map<Int, EventApiData> =   getFavoriteEventsFromFile()
+        favoriteEvents = mutableMapOf()
+        favoriteEvents?.putAll(favoriteEventsFromFile)
+    }
 
     override fun saveFavoriteEvent(eventApiData: EventApiData) {
         eventApiData.id ?: return //если нулл, то ничего не делает и вызывает return
 
-        favoriteEvents[eventApiData.id] = eventApiData
-
+        favoriteEvents[eventApiData.id]= eventApiData
         saveFavoriteEventsToFile()
-
     }
 
     override fun removeFavoriteEvent(eventId: Int?) {
@@ -34,13 +38,13 @@ class DefaultFavoriteEventsRepository(
     }
 
     override fun getAllFavoriteEvents(): ResponseData<List<EventApiData>, Exception> {
-        favoriteEvents ?: run{
-            getFavoriteEventsFromFile()
-
-        }
         return ResponseData.Success(
             result = favoriteEvents.values.toList()
         )
+    }
+
+    override fun isFavorite(id: Int?): Boolean{
+       return favoriteEvents.containsKey(id)
     }
     private fun saveFavoriteEventsToFile(){
         val favoriteEventsJsonString: String = objectMapper.writeValueAsString(favoriteEvents)
@@ -53,8 +57,14 @@ class DefaultFavoriteEventsRepository(
     }
 
     private fun getFavoriteEventsFromFile(): Map<Int, EventApiData>{
-        val fileInputStream: FileInputStream = context.openFileInput(FAVORITES_FILE_NAME)
-            val favoriteEventsJsonString = fileInputStream.bufferedReader().readLines().joinToString()
+        var fileInputStream: FileInputStream ?= null
+        try{
+            fileInputStream= context.openFileInput(FAVORITES_FILE_NAME)
+        }catch (exception: Exception){
+            fileInputStream?.close()
+            return emptyMap()
+        }
+            val favoriteEventsJsonString = fileInputStream?.bufferedReader()?.readLines()?.joinToString().orEmpty()
         val mapType: MapType = objectMapper.typeFactory.constructMapType(Map:: class.java, Int:: class.java, EventApiData:: class.java)
 
         return objectMapper.readValue(favoriteEventsJsonString, mapType)

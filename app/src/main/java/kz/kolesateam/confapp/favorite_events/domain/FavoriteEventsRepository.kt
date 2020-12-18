@@ -5,12 +5,15 @@ import kz.kolesateam.confapp.events.data.models.ResponseData
 
 interface FavoriteEventsRepository {
     fun saveFavoriteEvent(
-        eventApiData: EventApiData
-        )
+            eventApiData: EventApiData
+    )
 
     fun removeFavoriteEvent(
             eventId: Int?
     )
 
     fun getAllFavoriteEvents(): ResponseData<List<EventApiData>, Exception>
+
+    fun isFavorite(id: Int?): Boolean
+
 }
