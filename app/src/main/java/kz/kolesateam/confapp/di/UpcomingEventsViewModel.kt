@@ -11,13 +11,15 @@ import kz.kolesateam.confapp.events.data.dataSource.UserNameDataSource
 import kz.kolesateam.confapp.events.data.models.*
 import kz.kolesateam.confapp.events.domain.UpcomingEventsRepository
 import kz.kolesateam.confapp.favorite_events.domain.FavoriteEventsRepository
+import kz.kolesateam.confapp.notifications.NotificationAlarmHelper
 
 private const val DEFAULT_USER_NAME = "Гость"
 
 class UpcomingEventsViewModel(
         private val upcomingEventsRepository: UpcomingEventsRepository,
         private val favoriteEventsRepository: FavoriteEventsRepository,
-        private val userNameDataSource: UserNameDataSource
+        private val userNameDataSource: UserNameDataSource,
+        private val notificationAlarmHelper: NotificationAlarmHelper
 ) : ViewModel() {
 
     private val progressLiveData: MutableLiveData<ProgressState> = MutableLiveData()
@@ -35,9 +37,18 @@ class UpcomingEventsViewModel(
 
     fun onFavoriteClick(eventData: EventApiData) {
         when (eventData.isFavorite) {
-            true -> favoriteEventsRepository.saveFavoriteEvent(eventData)
-            else -> favoriteEventsRepository.removeFavoriteEvent(eventId = eventData.id)
+            true -> {
+                favoriteEventsRepository.saveFavoriteEvent(eventData)
+                scheduleEvent(eventData)
+
+            }else -> favoriteEventsRepository.removeFavoriteEvent(eventId = eventData.id)
         }
+    }
+
+    private fun scheduleEvent(eventData: EventApiData) {
+        notificationAlarmHelper.createNotificationAlarm(
+                content = eventData.title.orEmpty()
+        )
     }
 
     private fun getUpcomingEvents() {

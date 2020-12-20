@@ -21,7 +21,8 @@ val eventScreenModule: Module = module {
         UpcomingEventsViewModel(
             upcomingEventsRepository = get(),
             userNameDataSource = get(named(MEMORY_DATA_SOURCE)),
-                favoriteEventsRepository = get()
+                favoriteEventsRepository = get(),
+        notificationAlarmHelper = get()
         )
     }
 
