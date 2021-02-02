@@ -1,16 +1,20 @@
 package kz.kolesateam.confapp.allevents.presentation
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.EventApiData
-import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
 import kz.kolesateam.confapp.events.presentation.view.BaseViewHolder
-import kz.kolesateam.confapp.events.presentation.view.TIME_AND_PLACE_FORMAT
+import org.threeten.bp.ZonedDateTime
 
+const val TIME_PLACE_FORMAT = "%s - %s • %s"
+const val LEADING_ZERO_FORMAT = "%02d:%02d"
 class AllEventsViewHolder(
     view: View,
-    private val allEVentsClickListener: UpcomingClickListener
+    private val eventClick: (eventId: Int) -> Unit,
+    private val eventCardClick: (eventData: EventApiData) -> Unit,
+    private val favoriteImageViewClick: (eventData: EventApiData) -> Unit
 ) : BaseViewHolder<EventApiData>(view) {
 
     private val branchCurrentEvent: View = view.findViewById(R.id.card_view)
@@ -22,17 +26,44 @@ class AllEventsViewHolder(
         branchCurrentEvent.findViewById(R.id.event_speakers_job_textview)
     private val currentEventTitle: TextView =
         branchCurrentEvent.findViewById(R.id.event_title_textview)
+    private val imageFavorite: ImageView = itemView.findViewById(R.id.upcoming_events_button_favorite)
 
-    override fun onBind(data: EventApiData) {
-        val currentEventDateAndPlaceText = TIME_AND_PLACE_FORMAT.format(
-            data.startTime,
-            data.endTime,
-            data.place,
+    override fun onBind(branchApidata: EventApiData) {
+        val event: EventApiData? = branchApidata
+        val currentEventDatePlaceText = TIME_PLACE_FORMAT.format(
+            event?.startTime?.let { getEventTime(it) },
+            event?.endTime?.let { getEventTime(it) },
+            event?.place
         )
 
-        currentEventDateAndPlace.text = currentEventDateAndPlaceText
-        currentSpeakerName.text = data.speaker?.fullName ?: "noname"
-        currentSpeakersJob.text = data.speaker?.job
-        currentEventTitle.text = data.title
+        currentEventDateAndPlace.text = currentEventDatePlaceText
+        currentSpeakerName.text = branchApidata.speaker?.fullName ?: "noname"
+        currentSpeakersJob.text = branchApidata.speaker?.job
+        currentEventTitle.text = branchApidata.title
+
+        currentEventTitle.setOnClickListener {
+            eventCardClick(
+                event!!
+            )
+        }
+        imageFavorite.setOnClickListener{
+            event?.isFavorite = !event?.isFavorite!!
+
+            val favoriteImageResource = getFavoriteImageResource(event.isFavorite)
+            imageFavorite.setImageResource(favoriteImageResource)
+
+            favoriteImageViewClick(event)
+        }
+    }
+    private fun getEventTime(eventDateAndTime: String): String {
+        val zonedDateTime = ZonedDateTime.parse(eventDateAndTime)
+        return String.format(LEADING_ZERO_FORMAT, zonedDateTime.hour, zonedDateTime.minute)
+    }
+
+    private fun getFavoriteImageResource(
+        isFavorite: Boolean
+    ): Int = when (isFavorite){
+        true -> R.drawable.ic_favorite_filled_imageview
+        false -> R.drawable.ic_favorite_border
     }
 }

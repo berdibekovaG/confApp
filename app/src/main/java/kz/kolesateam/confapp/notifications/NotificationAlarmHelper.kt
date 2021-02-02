@@ -5,36 +5,57 @@ import android.app.Application
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import kz.kolesateam.confapp.events.data.models.EventApiData
+import org.threeten.bp.ZonedDateTime
 import java.util.*
 
 const val NOTIFICATION_CONTENT_KEY = "notification_title"
+const val NOTIFICATION_EVENT_ID_KEY = "event_id"
 
 class NotificationAlarmHelper(
         private val application: Application
 ) {
     fun createNotificationAlarm(
-            content: String
+           eventApiData: EventApiData
     ) {
+        val content = eventApiData.title
+
         val alarmManager: AlarmManager? = application.getSystemService(
                 Context.ALARM_SERVICE
         ) as? AlarmManager
-        val intent= Intent(application, NotificationAlarmBroadcastReceiver::class.java).apply {
-            putExtra(NOTIFICATION_CONTENT_KEY, content)
-        }
-        val pendingIntent: PendingIntent =PendingIntent.getBroadcast(application, 0, intent, 0)
-
-        val calendar: Calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.YEAR, 2020)
-        calendar.set(Calendar.MONTH, 12)
-        calendar.set(Calendar.DAY_OF_MONTH, 20)
-        calendar.set(Calendar.HOUR_OF_DAY, 1)
-        calendar.set(Calendar.MINUTE, 53)
+        val pendingIntent: PendingIntent =
+            Intent(application, NotificationAlarmBroadcastReceiver::class.java).apply {
+                putExtra(NOTIFICATION_CONTENT_KEY, content)
+                putExtra(NOTIFICATION_EVENT_ID_KEY, eventApiData.id)
+            }.let {
+                PendingIntent.getBroadcast(application, eventApiData.id!!, it, PendingIntent.FLAG_ONE_SHOT)
+            }
 
         alarmManager?.setExact(
                 AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
+            getStartTime(getDateTimeByFormat(eventApiData.startTime!!)),
                 pendingIntent
         )
     }
+
+    fun cancelNotificationAlarm(
+        eventApiData: EventApiData
+    ){
+        val alarmManager: AlarmManager? = application.getSystemService(
+            Context.ALARM_SERVICE
+        ) as? AlarmManager
+
+        val requestCode = eventApiData.id as Int
+        val pendingIntent: PendingIntent = Intent(application,
+            NotificationAlarmBroadcastReceiver::class.java).let {
+            PendingIntent.getBroadcast(application, eventApiData.id, it,
+                PendingIntent.FLAG_ONE_SHOT
+            )
+        }
+        alarmManager?.cancel(pendingIntent)
+
+    }
+    private fun getStartTime(
+        startTime: ZonedDateTime
+    ): Long = startTime.toEpochSecond() * 1000 - 300000
 }

@@ -8,6 +8,6 @@ import retrofit2.http.Path
 interface AllEventsDataSource {
     @GET("/branch_events/{branchId}")
     fun getAllUpcomingEvents(
-        @Path("branchId") branchId: Int = 0
+        @Path("branchId") branchId: Int
     ): Call<List<EventApiData>>
 }

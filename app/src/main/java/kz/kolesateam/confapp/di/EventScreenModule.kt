@@ -38,10 +38,14 @@ val eventScreenModule: Module = module {
 
         retrofit.create(UpcomingEventDataSource::class.java)
     }
+
+
     viewModel {
         AllEventsViewModel(
-            allEventsActivityRepository = get(),
-           // userNameDataSource = get(named(MEMORY_DATA_SOURCE))
+            allEventsRepository = get(),
+            branchIdDataSource = get(),
+            favoritesRepository = get(),
+            notificationAlarmHelper = get()
         )
     }
     single {

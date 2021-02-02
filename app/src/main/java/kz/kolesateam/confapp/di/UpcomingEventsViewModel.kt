@@ -46,9 +46,7 @@ class UpcomingEventsViewModel(
     }
 
     private fun scheduleEvent(eventData: EventApiData) {
-        notificationAlarmHelper.createNotificationAlarm(
-                content = eventData.title.orEmpty()
-        )
+        notificationAlarmHelper.createNotificationAlarm(eventData)
     }
 
     private fun getUpcomingEvents() {

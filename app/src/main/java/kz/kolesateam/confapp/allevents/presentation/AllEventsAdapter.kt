@@ -1,37 +1,52 @@
 package kz.kolesateam.confapp.allevents.presentation
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.EventApiData
+import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
 
 class AllEventsAdapter(
-   private val allEventsClickListeners: UpcomingClickListener
-) : RecyclerView.Adapter<AllEventsViewHolder>() {
+    private val eventClick: (branchId: Int)-> Unit,
+    private val eventCardClick: (eventData: EventApiData) ->Unit,
+    private val favoriteImageViewClick: (eventData: EventApiData) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val dataList: MutableList<EventApiData> = mutableListOf()
+    private val dataList: MutableList<UpcomingEventListItem> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllEventsViewHolder =
-        AllEventsViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.all_branch_item,
-                parent,
-                false
-            ),
-            allEventsClickListeners
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            1 -> AllEventsHeaderViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.header_all_events, parent, false)
+            )
+            else -> AllEventsViewHolder(
+                View.inflate(parent.context, R.layout.all_branch_item, null),
+                eventClick = eventClick,
+                eventCardClick = eventCardClick,
+                favoriteImageViewClick = favoriteImageViewClick
+            )
+        }
+    }
 
-    override fun onBindViewHolder(holder: AllEventsViewHolder, position: Int) {
-        holder.onBind(dataList[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is AllEventsHeaderViewHolder) {
+            holder.onBind(dataList[position].data as BranchApiData)
+        }
+        if (holder is AllEventsViewHolder){
+            holder.onBind(dataList[position].data as EventApiData)
+        }
     }
 
     override fun getItemCount(): Int {
         return dataList.size
     }
 
-    fun setList(eventList: List<EventApiData>) {
+    fun setList(eventList: List<UpcomingEventListItem>) {
         dataList.clear()
         dataList.addAll(eventList)
         notifyDataSetChanged()

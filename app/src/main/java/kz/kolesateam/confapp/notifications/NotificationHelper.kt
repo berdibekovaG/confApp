@@ -1,14 +1,13 @@
 package kz.kolesateam.confapp.notifications
 
-import android.app.Application
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.events.data.models.EventApiData
 
 object NotificationHelper {
 
@@ -58,4 +57,6 @@ object NotificationHelper {
         val notificationManager: NotificationManager = application.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
+
+
 }
