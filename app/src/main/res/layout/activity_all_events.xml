@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_upcoming_events"
     tools:context=".allevents.presentation.AllEventsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_upcoming_events"
+
         android:orientation="vertical"
        >
         <LinearLayout
@@ -54,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/padding_24dp"
             android:paddingBottom="@dimen/padding_72dp"

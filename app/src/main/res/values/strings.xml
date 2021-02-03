@@ -24,9 +24,11 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="event_details_speaker">event detail speaker</string>
-    <string name="upcoming_events_card_ex2">speakers name</string>
+    <string name="name_of_speake">speakers name</string>
     <string name="upcoming_events_card_ex3">speakers job</string>
     <string name="upcoming_events_card_ex1">time and place</string>
     <string name="upcoming_events_card_ex4">event details title</string>
     <string name="fav_btn_to_favorites">в избранное</string>
+    <string name="favorite_events_list_quite">здесь пока тихо...</string>
+    <string name="fav_events_to_main">на главную</string>
 </resources>

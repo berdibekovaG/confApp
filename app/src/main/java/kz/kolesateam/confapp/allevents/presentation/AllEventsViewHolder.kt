@@ -3,6 +3,7 @@ package kz.kolesateam.confapp.allevents.presentation
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.presentation.view.BaseViewHolder
@@ -10,25 +11,25 @@ import org.threeten.bp.ZonedDateTime
 
 const val TIME_PLACE_FORMAT = "%s - %s • %s"
 const val LEADING_ZERO_FORMAT = "%02d:%02d"
+
 class AllEventsViewHolder(
     view: View,
     private val eventClick: (eventId: Int) -> Unit,
     private val eventCardClick: (eventData: EventApiData) -> Unit,
     private val favoriteImageViewClick: (eventData: EventApiData) -> Unit
-) : BaseViewHolder<EventApiData>(view) {
+) :  RecyclerView.ViewHolder(view) {
 
-    private val branchCurrentEvent: View = view.findViewById(R.id.card_view)
     private val currentEventDateAndPlace: TextView =
-        branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
+        view.findViewById(R.id.event_date_and_place_textview)
     private val currentSpeakerName: TextView =
-        branchCurrentEvent.findViewById(R.id.event_speaker_name_textiew)
+        view.findViewById(R.id.event_speaker_name_textiew)
     private val currentSpeakersJob: TextView =
-        branchCurrentEvent.findViewById(R.id.event_speakers_job_textview)
+        view.findViewById(R.id.event_speakers_job_textview)
     private val currentEventTitle: TextView =
-        branchCurrentEvent.findViewById(R.id.event_title_textview)
-    private val imageFavorite: ImageView = itemView.findViewById(R.id.upcoming_events_button_favorite)
+        view.findViewById(R.id.event_title_textview)
+    private val imageFavorite: ImageView = itemView.findViewById(R.id.ic_favorite_imageview)
 
-    override fun onBind(branchApidata: EventApiData) {
+    fun onEventBind(branchApidata: EventApiData) {
         val event: EventApiData? = branchApidata
         val currentEventDatePlaceText = TIME_PLACE_FORMAT.format(
             event?.startTime?.let { getEventTime(it) },
@@ -48,7 +49,6 @@ class AllEventsViewHolder(
         }
         imageFavorite.setOnClickListener{
             event?.isFavorite = !event?.isFavorite!!
-
             val favoriteImageResource = getFavoriteImageResource(event.isFavorite)
             imageFavorite.setImageResource(favoriteImageResource)
 
@@ -64,6 +64,6 @@ class AllEventsViewHolder(
         isFavorite: Boolean
     ): Int = when (isFavorite){
         true -> R.drawable.ic_favorite_filled_imageview
-        false -> R.drawable.ic_favorite_border
+        false -> R.drawable.ic_favorite_blue
     }
 }

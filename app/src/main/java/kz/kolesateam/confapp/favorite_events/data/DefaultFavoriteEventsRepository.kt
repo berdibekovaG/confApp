@@ -37,10 +37,9 @@ class DefaultFavoriteEventsRepository(
         saveFavoriteEventsToFile()
     }
 
-    override fun getAllFavoriteEvents(): ResponseData<List<EventApiData>, Exception> {
-        return ResponseData.Success(
-            result = favoriteEvents.values.toList()
-        )
+    override fun getAllFavoriteEvents(): List<EventApiData> {
+        return favoriteEvents.values.toList()
+
     }
 
     override fun isFavorite(id: Int?): Boolean{

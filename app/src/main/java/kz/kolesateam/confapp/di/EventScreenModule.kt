@@ -35,7 +35,6 @@ val eventScreenModule: Module = module {
 
     single {
         val retrofit: Retrofit = get()
-
         retrofit.create(UpcomingEventDataSource::class.java)
     }
 
@@ -50,7 +49,6 @@ val eventScreenModule: Module = module {
     }
     single {
         val retrofit: Retrofit = get()
-
         retrofit.create(AllEventsDataSource::class.java)
     }
 

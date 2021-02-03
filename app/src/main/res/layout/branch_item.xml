@@ -1,58 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".events.presentation.UpcomingEventsActivity">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/upcoming_events_events_branch_title_layout"
+        android:id="@+id/item_upcoming_events_branch_block"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/padding_16dp">
+        android:padding="@dimen/margin_size_16dp">
 
         <TextView
-            android:id="@+id/branch_title"
-            android:layout_width="match_parent"
+            android:id="@+id/item_upcoming_events_branch_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_arrow_forward"
-            android:paddingBottom="@dimen/padding_16dp"
-            android:text="@string/branch_title"
-            android:textColor="@color/branch_item_title_white"
+            android:text="Android"
             android:textSize="@dimen/acthello_texview_testsize_24sp"
-            android:visibility="visible"
-            tools:ignore="InvalidId" />
+            android:layout_weight="1"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:layout_width="@dimen/ic_size_24dp"
+            android:layout_height="@dimen/ic_size_24dp"
+            android:src="@drawable/ic_arrow_forward"
+            android:padding="4dp"
+            />
     </LinearLayout>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
         android:scrollbars="none">
-
         <LinearLayout
-            android:id="@+id/branch_list_item_container"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <include
-                android:id="@+id/branch_current_event"
+                android:id="@+id/item_upcoming_events_branch_current_event"
                 layout="@layout/event_card_layout"
                 android:layout_width="@dimen/card_size_320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_size_16dp"
-                android:layout_marginRight="@dimen/margin_size_8dp" />
-
+                android:layout_marginLeft="@dimen/padding_16dp"
+                android:layout_marginRight="8dp"
+                />
             <include
-                android:id="@+id/branch_next_event"
+                android:id="@+id/item_upcoming_events_branch_next_event"
                 layout="@layout/event_card_layout"
                 android:layout_width="@dimen/card_size_320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_size_16dp" />
+                android:layout_marginRight="@dimen/padding_16dp"/>
+
         </LinearLayout>
 
+
     </HorizontalScrollView>
+
+
 
 </LinearLayout>

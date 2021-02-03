@@ -2,7 +2,6 @@ package kz.kolesateam.confapp.event_details.presentation
 
 import android.content.Context
 import android.content.Intent
-import kz.kolesateam.confapp.favorite_events.presentation.FavoriteEventsActivity
 
 const val EVENT_ID = "EVENT_ID"
 

@@ -41,7 +41,8 @@ class UpcomingEventsViewModel(
                 favoriteEventsRepository.saveFavoriteEvent(eventData)
                 scheduleEvent(eventData)
 
-            }else -> favoriteEventsRepository.removeFavoriteEvent(eventId = eventData.id)
+            }
+            else -> favoriteEventsRepository.removeFavoriteEvent(eventId = eventData.id)
         }
     }
 

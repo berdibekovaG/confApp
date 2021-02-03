@@ -25,10 +25,10 @@ class BranchViewHolder(
     private lateinit var currentEvent: EventApiData
     private lateinit var nextEvent: EventApiData
 
-    private val branchTitle: TextView = view.findViewById(R.id.branch_title)
-    private val branchTitleLayout: View = view.findViewById(R.id.upcoming_events_events_branch_title_layout)
+    private val branchTitle: TextView = view.findViewById(R.id.item_upcoming_events_branch_title)
+    private val branchTitleLayout: View = view.findViewById(R.id.item_upcoming_events_branch_block)
 
-    private val branchCurrentEvent: View = view.findViewById(R.id.branch_current_event)
+    private val branchCurrentEvent: View = view.findViewById(R.id.item_upcoming_events_branch_current_event)
     private val currentEventDateAndPlace: TextView =
             branchCurrentEvent.findViewById(R.id.event_date_and_place_textview)
     private val currentSpeakerName: TextView =
@@ -40,7 +40,7 @@ class BranchViewHolder(
     private val currentFavoriteView: ImageView = branchCurrentEvent.findViewById(R.id.ic_favorite_imageview)
 
 
-    private val branchNextEvent: View = view.findViewById(R.id.branch_next_event)
+    private val branchNextEvent: View = view.findViewById(R.id.item_upcoming_events_branch_next_event)
     private val nextEventDateAndPlace: TextView =
             branchNextEvent.findViewById(R.id.event_date_and_place_textview)
     private val nextSpeakerName: TextView =
@@ -81,9 +81,9 @@ class BranchViewHolder(
 
         nextEvent = branchApiData.events.last()
         val nextEventDateAndPlaceText = TIME_AND_PLACE_FORMAT.format(
-                nextEvent.startTime,
-                nextEvent.endTime,
-                nextEvent.place,
+                nextEvent?.startTime?.let { getEventTime(it) },
+                nextEvent?.endTime?.let { getEventTime(it) },
+                nextEvent?.place
         )
         nextEventDateAndPlace.text = nextEventDateAndPlaceText
         nextSpeakerName.text = nextEvent.speaker?.fullName ?: "noname"
@@ -132,7 +132,7 @@ class BranchViewHolder(
 
     private fun getFavoriteImageResource(isFavorite: Boolean): Int = when (isFavorite) {
         true -> R.drawable.ic_favorite_filled_imageview
-        else -> R.drawable.ic_favorite_border
+        else -> R.drawable.ic_favorite_blue
     }
 
     private fun getEventTime(eventDateAndTime: String): String {

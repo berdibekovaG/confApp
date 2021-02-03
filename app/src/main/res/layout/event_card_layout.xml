@@ -37,7 +37,7 @@
         android:id="@+id/ic_favorite_imageview"
         android:layout_width="@dimen/btn_size_16dp"
         android:layout_height="@dimen/image_view_size_14dp"
-        android:src="@drawable/ic_favorite_border"
+        android:src="@drawable/ic_favorite_border_blue"
         app:layout_constraintBottom_toBottomOf="@id/event_date_and_place_textview"
         app:layout_constraintLeft_toRightOf="@id/event_date_and_place_textview"
         app:layout_constraintRight_toRightOf="parent"
@@ -70,6 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_size_8dp"
+
         android:ellipsize="end"
         android:maxLines="3"
         android:minLines="3"

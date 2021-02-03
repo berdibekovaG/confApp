@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jakewharton.threetenabp.AndroidThreeTen
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.allevents.data.BranchIdDataSource
 import kz.kolesateam.confapp.allevents.presentation.AllEventsActivity
@@ -41,17 +42,18 @@ class UpcomingEventsActivity(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upcoming_events)
-
+        AndroidThreeTen.init(this)
         bindViews()
 }
 
     private fun bindViews() {
-        val favoritesButton: View = findViewById(R.id.upcoming_events_button_favorite)
+        recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
+        progressBar = findViewById(R.id.progressbar)
+
+        val favoritesButton: Button = findViewById(R.id.events_button_favorites)
         favoritesButton.setOnClickListener{
             startActivity(Intent(this, FavoriteEventsActivity:: class.java))
         }
-        recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
-        progressBar = findViewById(R.id.progressbar)
         recyclerView.adapter = branchAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         observeUpcomingEventsViewModule()
@@ -99,9 +101,4 @@ class UpcomingEventsActivity(
     {
         progressBar.isVisible = progressState is ProgressState.Loading
     }
-
-//    private fun startingAllEventsActivity() {
-//        val intent = Intent(this, AllEventsActivity::class.java)
-//        startActivity(intent)
-//    }
 }

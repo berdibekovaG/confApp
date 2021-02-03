@@ -12,7 +12,7 @@ interface FavoriteEventsRepository {
             eventId: Int?
     )
 
-    fun getAllFavoriteEvents(): ResponseData<List<EventApiData>, Exception>
+    fun getAllFavoriteEvents():List<EventApiData>
 
     fun isFavorite(id: Int?): Boolean
 

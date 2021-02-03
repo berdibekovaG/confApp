@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.all_events.presentation.view.AllEventsBranchAdapter
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.di.AllEventsViewModel
@@ -26,7 +27,7 @@ class AllEventsActivity : AppCompatActivity() {
 
     private val allEventsViewModel: AllEventsViewModel by viewModel()
 
-    private val allEventsBranchAdapter: AllEventsAdapter = AllEventsAdapter(
+    private val allEventsBranchAdapter: AllEventsBranchAdapter = AllEventsBranchAdapter(
         ::onEventClick,
         ::onEventCardClick,
         ::onFavoriteClick
@@ -50,7 +51,7 @@ class AllEventsActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.activity_all_events_recycler_view)
         progressBar = findViewById(R.id.progressbar)
         buttonBack = findViewById(R.id.buttonBack)
-        favoriteButton = findViewById(R.id.upcoming_events_button_favorite)
+        favoriteButton = findViewById(R.id.events_button_favorites)
 
         favoriteButton.setOnClickListener{
             val favoriteEventsListActivityIntent = Intent(this, FavoriteEventsActivity::class.java)
