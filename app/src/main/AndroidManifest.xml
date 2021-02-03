@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".favorite_events.presentation.FavoriteEventsActivity"></activity>
         <activity android:name=".allevents.presentation.AllEventsActivity" />
+        <activity android:name=".event_details.presentation.EventDetailsActivity"/>
         <activity android:name=".events.presentation.UpcomingEventsActivity" />
         <activity android:name=".hello.presentation.HelloActivity">
             <intent-filter>

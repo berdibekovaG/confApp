@@ -36,15 +36,13 @@ class AllEventsViewModel(
     private fun getAllEvents(branchId: BranchApiData) {
         progressLiveData.value = ProgressState.Loading
         GlobalScope.launch(Dispatchers.Main) {
-            progressLiveData.value = ProgressState.Loading
-
-            val response =
-                withContext(Dispatchers.IO) {
-                    allEventsRepository.getAllEvents(branchId.id as Int)
-                }
+            val response: ResponseData<List<UpcomingEventListItem>, Exception> = withContext(
+                Dispatchers.IO) {
+                allEventsRepository.getAllEvents(branchId.id as Int)
+            }
             when (response) {
-                is ResponseData.Success -> allUpcomingEventLiveData.value = response.result
-                is ResponseData.Error -> println(response.error)
+                is ResponseData.Success -> allUpcomingEventLiveData.value = prepareAllEventsList(response.result)
+                is ResponseData.Error -> errorLiveData.value = response.error
             }
             progressLiveData.value = ProgressState.Done
         }
@@ -82,7 +80,7 @@ class AllEventsViewModel(
         allEvents.forEach{
             val branchApiData: BranchApiData = it.data as? BranchApiData ?: return@forEach
 
-            branchApiData.events?.forEach{eventApiData ->
+            branchApiData.events.forEach{eventApiData ->
                 eventApiData.isFavorite = favoritesRepository.isFavorite(eventApiData.id)
             }
         }

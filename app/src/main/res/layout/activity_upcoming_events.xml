@@ -14,9 +14,13 @@
         tools:itemCount="5"
         tools:listitem="@layout/branch_item" />
 
-    <Button
+    <include
         android:id="@+id/upcoming_events_button_favorite"
-        style="@style/FavoriteButton" />
+        layout="@layout/button_favorite_upcoming_events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="27dp"/>
 
     <ProgressBar
         android:id="@+id/progressbar"

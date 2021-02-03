@@ -3,28 +3,40 @@ package kz.kolesateam.confapp.events.presentation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.allevents.data.BranchIdDataSource
 import kz.kolesateam.confapp.allevents.presentation.AllEventsActivity
 import kz.kolesateam.confapp.di.UpcomingEventsViewModel
+import kz.kolesateam.confapp.event_details.presentation.EventDetailsRouter
+import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
 import kz.kolesateam.confapp.favorite_events.presentation.FavoriteEventsActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpcomingEventsActivity(
 ) : AppCompatActivity() {
 
     private val upcomingEventsViewModule : UpcomingEventsViewModel by viewModel()
+    private val branchIdDataSource: BranchIdDataSource by inject()
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
 
-    private val branchAdapter: BranchAdapter = BranchAdapter(getEventClickListener())
+
+    private val branchAdapter: BranchAdapter = BranchAdapter(
+        ::onEventClick,
+        ::onEventCardClick,
+        ::onFavoriteClick)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +46,7 @@ class UpcomingEventsActivity(
 }
 
     private fun bindViews() {
-        val favoritesButton: Button = findViewById(R.id.upcoming_events_button_favorite)
+        val favoritesButton: View = findViewById(R.id.upcoming_events_button_favorite)
         favoritesButton.setOnClickListener{
             startActivity(Intent(this, FavoriteEventsActivity:: class.java))
         }
@@ -62,19 +74,19 @@ class UpcomingEventsActivity(
         ).show()
     }
 
-    private fun getEventClickListener(): UpcomingClickListener = object : UpcomingClickListener {
-        override fun onBranchClick(title: String) {
-            startingAllEventsActivity()
-        }
+    private fun onEventCardClick(
+        event: EventApiData){
+        startActivity(EventDetailsRouter().createIntent(this, event.id!!))
+    }
 
-        override fun onEventClick(title: String) {
-            Toast.makeText(
-                this@UpcomingEventsActivity,
-                "Branch: $title", Toast.LENGTH_SHORT
-            ).show()
-        }
+        fun onEventClick(
+            branchId: BranchApiData){
+                branchIdDataSource.setBranchId(branchId)
+                val allEventsActivityIntent = Intent(this, AllEventsActivity::class.java)
+                startActivity(allEventsActivityIntent)
+            }
 
-        override fun onFavoriteClick(eventData: EventApiData) {
+        fun onFavoriteClick(eventData: EventApiData) {
             upcomingEventsViewModule.onFavoriteClick(eventData)
 
             Toast.makeText(
@@ -83,22 +95,13 @@ class UpcomingEventsActivity(
             ).show()
         }
 
-        override fun onFavoriteClick(eventTitle: Unit) {
-
-
-            Toast.makeText(
-                this@UpcomingEventsActivity,
-                "нажато сердечко", Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
     private fun handleProgressBarState(progressState: ProgressState)
     {
         progressBar.isVisible = progressState is ProgressState.Loading
     }
 
-    private fun startingAllEventsActivity() {
-        val intent = Intent(this, AllEventsActivity::class.java)
-        startActivity(intent)
-    }
+//    private fun startingAllEventsActivity() {
+//        val intent = Intent(this, AllEventsActivity::class.java)
+//        startActivity(intent)
+//    }
 }

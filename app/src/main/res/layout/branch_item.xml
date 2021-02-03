@@ -7,6 +7,7 @@
     tools:context=".events.presentation.UpcomingEventsActivity">
 
     <LinearLayout
+        android:id="@+id/upcoming_events_events_branch_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

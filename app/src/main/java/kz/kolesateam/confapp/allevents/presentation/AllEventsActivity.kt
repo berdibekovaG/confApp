@@ -3,6 +3,7 @@ package kz.kolesateam.confapp.allevents.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,13 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.di.AllEventsViewModel
-import kz.kolesateam.confapp.event_details.EventDetailsRouter
+import kz.kolesateam.confapp.event_details.presentation.EventDetailsRouter
 import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.ProgressState
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
-import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
 import kz.kolesateam.confapp.events.presentation.UpcomingEventsActivity
-import kz.kolesateam.confapp.events.presentation.view.BranchAdapter
 import kz.kolesateam.confapp.favorite_events.presentation.FavoriteEventsActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,7 +34,7 @@ class AllEventsActivity : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
-    private lateinit var buttonBack: Button
+    private lateinit var buttonBack: ImageView
     private lateinit var favoriteButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +95,9 @@ class AllEventsActivity : AppCompatActivity() {
     private fun onEventCardClick(
         event: EventApiData
     ){
-        startActivity(EventDetailsRouter().createIntent(this, event.id!!))
+        startActivity(
+            EventDetailsRouter()
+                .createIntent(this, event.id!!))
     }
     private fun onEventClick(
         eventTitle: Int

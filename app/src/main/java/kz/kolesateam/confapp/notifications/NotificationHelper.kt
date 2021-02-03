@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import kz.kolesateam.confapp.R
+import kz.kolesateam.confapp.event_details.presentation.EventDetailsRouter
 import kz.kolesateam.confapp.events.data.models.EventApiData
 
 object NotificationHelper {
@@ -21,11 +22,13 @@ object NotificationHelper {
 
     fun sendNotification(
             title: String,
-            content: String
+            content: String,
+            eventId: Int
     ) {
         val notification: Notification = getNotification(
                 title = title,
-                content = content
+                content = content,
+                eventId = eventId
         )
         NotificationManagerCompat.from(application).notify(
                 notificationCounter++,
@@ -35,16 +38,33 @@ object NotificationHelper {
 
     private fun getNotification(
             title: String,
-            content: String
+            content: String,
+            eventId: Int
     ): Notification = NotificationCompat.Builder(
             application, "favorite_notification_channel"
     ).setContentTitle(title)
             .setContentText(content)
             .setSmallIcon(R.drawable.ic_favorite_filled_imageview)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(getPendingIntent(eventId = eventId))
             .setAutoCancel(true)
             .build()
 
+    private fun getPendingIntent(
+        eventId: Int
+    ): PendingIntent{
+        val upcomingEventsIntent = EventDetailsRouter().createIntentForNotification(
+            context = application,
+            eventId = eventId
+        ).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        }
+        return PendingIntent.getActivity(application,
+            0,
+            upcomingEventsIntent,
+            PendingIntent.FLAG_ONE_SHOT
+        )
+    }
 
     private fun initChannel() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return

@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.BranchApiData
+import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
 import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
 
 class BranchAdapter(
-    private val eventClickListener: UpcomingClickListener,
+    private val eventClick: (branchId: BranchApiData) ->Unit,
+    private val eventCardClick: (event: EventApiData) ->Unit,
+    private val favoriteImageViewClick: (eventApiData: EventApiData) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val dataList: MutableList<UpcomingEventListItem> = mutableListOf()
@@ -24,7 +27,9 @@ class BranchAdapter(
             else ->
                 BranchViewHolder(
                     View.inflate(parent.context, R.layout.branch_item, null),
-                    eventClickListener = eventClickListener,
+                    eventClick = eventClick,
+                    eventCardClick = eventCardClick,
+                    favoriteImageViewClick = favoriteImageViewClick
                 )
         }
     }
