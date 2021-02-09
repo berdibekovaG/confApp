@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <Button
         android:id="@+id/events_button_favorites"
-        android:layout_width="163dp"
+        android:layout_width="@dimen/layout_163dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button"
         android:drawableLeft="@drawable/ic_favorite_border_blue"

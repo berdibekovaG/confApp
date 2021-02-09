@@ -12,7 +12,7 @@ interface FavoriteEventsRepository {
             eventId: Int?
     )
 
-    fun getAllFavoriteEvents():List<EventApiData>
+    fun getAllFavoriteEvents(): List<EventApiData>
 
     fun isFavorite(id: Int?): Boolean
 

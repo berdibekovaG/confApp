@@ -23,5 +23,7 @@
     <color name="textview_textcolor_grey">#888B94</color>
     <color name="branch_item_title_white">#FFFFFF</color>
     <color name="text_color_blue">#2A81DD</color>
+    <color name="img_btn_dark_blue">#051021</color>
+    <color name="textview_white">#FAFAFA</color>
 
 </resources>

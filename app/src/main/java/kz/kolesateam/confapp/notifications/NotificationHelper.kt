@@ -8,7 +8,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.event_details.presentation.EventDetailsRouter
-import kz.kolesateam.confapp.events.data.models.EventApiData
 
 object NotificationHelper {
 
@@ -51,18 +50,18 @@ object NotificationHelper {
             .build()
 
     private fun getPendingIntent(
-        eventId: Int
-    ): PendingIntent{
+            eventId: Int
+    ): PendingIntent {
         val upcomingEventsIntent = EventDetailsRouter().createIntentForNotification(
-            context = application,
-            eventId = eventId
+                context = application,
+                eventId = eventId
         ).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
         return PendingIntent.getActivity(application,
-            0,
-            upcomingEventsIntent,
-            PendingIntent.FLAG_ONE_SHOT
+                0,
+                upcomingEventsIntent,
+                PendingIntent.FLAG_ONE_SHOT
         )
     }
 

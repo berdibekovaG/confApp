@@ -8,19 +8,19 @@ import kz.kolesateam.confapp.favorite_events.domain.FavoriteEventsRepository
 import kz.kolesateam.confapp.notifications.NotificationAlarmHelper
 
 class FavoritesViewModel(
-    private val favoritesRepository: FavoriteEventsRepository,
-    private val notificationAlarmHelper: NotificationAlarmHelper
-): ViewModel() {
+        private val favoritesRepository: FavoriteEventsRepository,
+        private val notificationAlarmHelper: NotificationAlarmHelper
+) : ViewModel() {
 
     private val favoriteEventsLiveData: MutableLiveData<List<EventApiData>> = MutableLiveData()
     fun getFavoriteEventsLiveData(): LiveData<List<EventApiData>> = favoriteEventsLiveData
 
-    fun onStart(){
+    fun onStart() {
         favoriteEventsLiveData.value = favoritesRepository.getAllFavoriteEvents()
     }
 
-    fun onFavoriteClick(eventApiData: EventApiData){
-        when(eventApiData.isFavorite){
+    fun onFavoriteClick(eventApiData: EventApiData) {
+        when (eventApiData.isFavorite) {
             true -> {
                 favoritesRepository.saveFavoriteEvent(eventApiData)
                 scheduleEvent(eventApiData)

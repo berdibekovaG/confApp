@@ -20,6 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.ZonedDateTime
 
 const val DEFAULT_EVENT_ID = 0
+
 class EventDetailsActivity : AppCompatActivity() {
 
     private val eventDetailsViewModel: EventDetailsViewModel by viewModel()
@@ -45,7 +46,7 @@ class EventDetailsActivity : AppCompatActivity() {
 
         bindViews()
         eventDetailsViewModel.onStart(
-            eventId
+                eventId
         )
         observeAllEventsViewModel()
         setOnClickListeners()
@@ -63,13 +64,14 @@ class EventDetailsActivity : AppCompatActivity() {
         title = findViewById(R.id.activity_event_details_title)
         description = findViewById(R.id.activity_event_details_description)
         invitedSpeaker = findViewById(R.id.activity_event_details_speaker_invited)
-
     }
+
     private fun observeAllEventsViewModel() {
         eventDetailsViewModel.eventDetailsLiveData.observe(this, ::showEventDetails)
     }
+
     private fun showEventDetails(responseData: ResponseData<EventApiData, String>) {
-        when(responseData){
+        when (responseData) {
             is ResponseData.Success -> {
                 Glide.with(this)
                         .load(responseData.result.speaker?.photoUrl)
@@ -77,7 +79,7 @@ class EventDetailsActivity : AppCompatActivity() {
                         .into(photoURL)
                 fullName.text = responseData.result.speaker?.fullName
                 job.text = responseData.result.speaker?.job
-                time_place.text =  TIME_PLACE_FORMAT.format(
+                time_place.text = TIME_PLACE_FORMAT.format(
                         responseData.result.startTime?.let { getEventTime(it) },
                         responseData.result.endTime?.let { getEventTime(it) },
                         responseData.result.place
@@ -92,15 +94,15 @@ class EventDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setOnClickListeners(){
-        buttonBack.setOnClickListener{
+    private fun setOnClickListeners() {
+        buttonBack.setOnClickListener {
             val upcomingEventsActivityIntent = Intent(this, UpcomingEventsActivity::class.java)
             startActivity(upcomingEventsActivityIntent)
         }
     }
 
     private fun handleProgressBarState(
-        progressState: ProgressState
+            progressState: ProgressState
     ) {
         progressBar.isVisible = progressState is ProgressState.Loading
     }
@@ -111,7 +113,7 @@ class EventDetailsActivity : AppCompatActivity() {
 
     private fun onFavoriteImageViewClick(
             eventApiData: EventApiData
-    ){
+    ) {
         imageViewFavorite.setOnClickListener {
             eventApiData.isFavorite = !eventApiData.isFavorite
             val favoriteImageResource = getFavoriteImageResource(eventApiData.isFavorite)
@@ -119,6 +121,7 @@ class EventDetailsActivity : AppCompatActivity() {
             eventDetailsViewModel.onFavoriteClick(eventApiData)
         }
     }
+
     private fun checkSpeaker(
             isInvited: Boolean
     ) {
@@ -126,14 +129,15 @@ class EventDetailsActivity : AppCompatActivity() {
             invitedSpeaker.gone()
         }
     }
+
     private fun getEventTime(eventDateAndTime: String): String {
         val zonedDateTime = ZonedDateTime.parse(eventDateAndTime)
         return String.format(LEADING_ZERO_FORMAT, zonedDateTime.hour, zonedDateTime.minute)
     }
 
     private fun getFavoriteImageResource(
-        isFavorite: Boolean
-    ): Int = when (isFavorite){
+            isFavorite: Boolean
+    ): Int = when (isFavorite) {
         true -> R.drawable.ic_favorite_filled_white
         false -> R.drawable.ic_favorite_border
     }

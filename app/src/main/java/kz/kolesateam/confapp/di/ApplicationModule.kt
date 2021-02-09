@@ -22,7 +22,7 @@ val applicationModule: Module = module {
 
     single {
         NotificationAlarmHelper(
-                application =  androidApplication()
+                application = androidApplication()
         )
     }
 }

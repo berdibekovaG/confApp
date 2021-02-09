@@ -6,35 +6,34 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.EventApiData
-import kz.kolesateam.confapp.events.presentation.view.BaseViewHolder
 import org.threeten.bp.ZonedDateTime
 
 const val TIME_PLACE_FORMAT = "%s - %s • %s"
 const val LEADING_ZERO_FORMAT = "%02d:%02d"
 
 class AllEventsViewHolder(
-    view: View,
-    private val eventClick: (eventId: Int) -> Unit,
-    private val eventCardClick: (eventData: EventApiData) -> Unit,
-    private val favoriteImageViewClick: (eventData: EventApiData) -> Unit
-) :  RecyclerView.ViewHolder(view) {
+        view: View,
+        private val eventClick: (eventId: Int) -> Unit,
+        private val eventCardClick: (eventData: EventApiData) -> Unit,
+        private val favoriteImageViewClick: (eventData: EventApiData) -> Unit
+) : RecyclerView.ViewHolder(view) {
 
     private val currentEventDateAndPlace: TextView =
-        view.findViewById(R.id.event_date_and_place_textview)
+            view.findViewById(R.id.event_date_and_place_textview)
     private val currentSpeakerName: TextView =
-        view.findViewById(R.id.event_speaker_name_textiew)
+            view.findViewById(R.id.event_speaker_name_textiew)
     private val currentSpeakersJob: TextView =
-        view.findViewById(R.id.event_speakers_job_textview)
+            view.findViewById(R.id.event_speakers_job_textview)
     private val currentEventTitle: TextView =
-        view.findViewById(R.id.event_title_textview)
+            view.findViewById(R.id.event_title_textview)
     private val imageFavorite: ImageView = itemView.findViewById(R.id.ic_favorite_imageview)
 
     fun onEventBind(branchApidata: EventApiData) {
         val event: EventApiData? = branchApidata
         val currentEventDatePlaceText = TIME_PLACE_FORMAT.format(
-            event?.startTime?.let { getEventTime(it) },
-            event?.endTime?.let { getEventTime(it) },
-            event?.place
+                event?.startTime?.let { getEventTime(it) },
+                event?.endTime?.let { getEventTime(it) },
+                event?.place
         )
 
         currentEventDateAndPlace.text = currentEventDatePlaceText
@@ -44,10 +43,10 @@ class AllEventsViewHolder(
 
         currentEventTitle.setOnClickListener {
             eventCardClick(
-                event!!
+                    event!!
             )
         }
-        imageFavorite.setOnClickListener{
+        imageFavorite.setOnClickListener {
             event?.isFavorite = !event?.isFavorite!!
             val favoriteImageResource = getFavoriteImageResource(event.isFavorite)
             imageFavorite.setImageResource(favoriteImageResource)
@@ -55,14 +54,15 @@ class AllEventsViewHolder(
             favoriteImageViewClick(event)
         }
     }
+
     private fun getEventTime(eventDateAndTime: String): String {
         val zonedDateTime = ZonedDateTime.parse(eventDateAndTime)
         return String.format(LEADING_ZERO_FORMAT, zonedDateTime.hour, zonedDateTime.minute)
     }
 
     private fun getFavoriteImageResource(
-        isFavorite: Boolean
-    ): Int = when (isFavorite){
+            isFavorite: Boolean
+    ): Int = when (isFavorite) {
         true -> R.drawable.ic_favorite_filled_imageview
         false -> R.drawable.ic_favorite_blue
     }

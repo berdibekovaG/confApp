@@ -53,13 +53,14 @@
 
             android:id="@+id/activity_all_events_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
 
             android:overScrollMode="never"
             android:paddingHorizontal="@dimen/padding_24dp"
             android:paddingBottom="@dimen/padding_72dp"
             android:scrollbars="none"
+            android:layout_marginStart="@dimen/margin_size_8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/all_branch_item" />
     </LinearLayout>

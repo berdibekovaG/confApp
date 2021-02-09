@@ -11,6 +11,6 @@ class HeadVIewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun onBind(userName: String) {
         userNameTextView.text =
-            userNameTextView.resources.getString(R.string.hello_user_fmt, userName)
+                userNameTextView.resources.getString(R.string.hello_user_fmt, userName)
     }
 }

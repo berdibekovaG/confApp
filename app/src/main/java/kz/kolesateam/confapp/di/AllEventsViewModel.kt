@@ -15,10 +15,10 @@ import kz.kolesateam.confapp.notifications.NotificationAlarmHelper
 import java.lang.Exception
 
 class AllEventsViewModel(
-    private val allEventsRepository: AllEventsActivityRepository,
-    private val branchIdDataSource: BranchIdDataSource,
-    private val favoritesRepository: FavoriteEventsRepository,
-    private val notificationAlarmHelper: NotificationAlarmHelper
+        private val allEventsRepository: AllEventsActivityRepository,
+        private val branchIdDataSource: BranchIdDataSource,
+        private val favoritesRepository: FavoriteEventsRepository,
+        private val notificationAlarmHelper: NotificationAlarmHelper
 ) : ViewModel() {
 
     private val progressLiveData: MutableLiveData<ProgressState> = MutableLiveData()
@@ -37,7 +37,7 @@ class AllEventsViewModel(
         progressLiveData.value = ProgressState.Loading
         GlobalScope.launch(Dispatchers.Main) {
             val response: ResponseData<List<UpcomingEventListItem>, Exception> = withContext(
-                Dispatchers.IO) {
+                    Dispatchers.IO) {
                 allEventsRepository.getAllEvents(branchId.id as Int)
             }
             when (response) {
@@ -47,6 +47,7 @@ class AllEventsViewModel(
             progressLiveData.value = ProgressState.Done
         }
     }
+
     private fun scheduleEvent(eventApiData: EventApiData) {
         notificationAlarmHelper.createNotificationAlarm(eventApiData)
     }
@@ -55,8 +56,8 @@ class AllEventsViewModel(
         notificationAlarmHelper.cancelNotificationAlarm(eventApiData)
     }
 
-    fun onFavoriteClick(eventApiData: EventApiData){
-        when(eventApiData.isFavorite){
+    fun onFavoriteClick(eventApiData: EventApiData) {
+        when (eventApiData.isFavorite) {
             true -> {
                 favoritesRepository.saveFavoriteEvent(eventApiData)
                 scheduleEvent(eventApiData)
@@ -67,20 +68,21 @@ class AllEventsViewModel(
             }
         }
     }
+
     private fun prepareAllEventsList(
-        allEvents: List<UpcomingEventListItem>
-    ) :List<UpcomingEventListItem>{
+            allEvents: List<UpcomingEventListItem>
+    ): List<UpcomingEventListItem> {
         val branch = branchIdDataSource.getBranchId()
         val allEventListWithBranchName: MutableList<UpcomingEventListItem> = mutableListOf()
         val branchNameData = UpcomingEventListItem(
-            type = 1,
-            data = branch
+                type = 1,
+                data = branch
         )
         allEventListWithBranchName.add(branchNameData)
-        allEvents.forEach{
+        allEvents.forEach {
             val branchApiData: BranchApiData = it.data as? BranchApiData ?: return@forEach
 
-            branchApiData.events.forEach{eventApiData ->
+            branchApiData.events.forEach { eventApiData ->
                 eventApiData.isFavorite = favoritesRepository.isFavorite(eventApiData.id)
             }
         }

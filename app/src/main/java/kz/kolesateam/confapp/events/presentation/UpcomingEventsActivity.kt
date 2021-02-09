@@ -3,7 +3,6 @@ package kz.kolesateam.confapp.events.presentation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
@@ -27,32 +26,31 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class UpcomingEventsActivity(
 ) : AppCompatActivity() {
 
-    private val upcomingEventsViewModule : UpcomingEventsViewModel by viewModel()
+    private val upcomingEventsViewModule: UpcomingEventsViewModel by viewModel()
     private val branchIdDataSource: BranchIdDataSource by inject()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
 
-
     private val branchAdapter: BranchAdapter = BranchAdapter(
-        ::onEventClick,
-        ::onEventCardClick,
-        ::onFavoriteClick)
+            ::onEventClick,
+            ::onEventCardClick,
+            ::onFavoriteClick)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upcoming_events)
         AndroidThreeTen.init(this)
         bindViews()
-}
+    }
 
     private fun bindViews() {
         recyclerView = findViewById(R.id.activity_upcoming_events_recyclerview)
         progressBar = findViewById(R.id.progressbar)
 
         val favoritesButton: Button = findViewById(R.id.events_button_favorites)
-        favoritesButton.setOnClickListener{
-            startActivity(Intent(this, FavoriteEventsActivity:: class.java))
+        favoritesButton.setOnClickListener {
+            startActivity(Intent(this, FavoriteEventsActivity::class.java))
         }
         recyclerView.adapter = branchAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -61,44 +59,44 @@ class UpcomingEventsActivity(
     }
 
     private fun observeUpcomingEventsViewModule() {
-        upcomingEventsViewModule.getProgressLiveData().observe(this,:: handleProgressBarState)
-        upcomingEventsViewModule.geUpcomingEventLiveData().observe(this,:: showResult)
-        upcomingEventsViewModule.getErrorEventLiveData().observe(this,::showError)
+        upcomingEventsViewModule.getProgressLiveData().observe(this, ::handleProgressBarState)
+        upcomingEventsViewModule.geUpcomingEventLiveData().observe(this, ::showResult)
+        upcomingEventsViewModule.getErrorEventLiveData().observe(this, ::showError)
     }
 
-    private fun showResult(upcomingEventList: List<UpcomingEventListItem>){
+    private fun showResult(upcomingEventList: List<UpcomingEventListItem>) {
         branchAdapter.setList(upcomingEventList)
     }
-    private fun showError(error: Exception){
+
+    private fun showError(error: Exception) {
         Toast.makeText(
-            this@UpcomingEventsActivity,
-            "Ошибка при загрузке", Toast.LENGTH_SHORT
+                this@UpcomingEventsActivity,
+                "Ошибка при загрузке", Toast.LENGTH_SHORT
         ).show()
     }
 
     private fun onEventCardClick(
-        event: EventApiData){
+            event: EventApiData) {
         startActivity(EventDetailsRouter().createIntent(this, event.id!!))
     }
 
-        fun onEventClick(
-            branchId: BranchApiData){
-                branchIdDataSource.setBranchId(branchId)
-                val allEventsActivityIntent = Intent(this, AllEventsActivity::class.java)
-                startActivity(allEventsActivityIntent)
-            }
+    fun onEventClick(
+            branchId: BranchApiData) {
+        branchIdDataSource.setBranchId(branchId)
+        val allEventsActivityIntent = Intent(this, AllEventsActivity::class.java)
+        startActivity(allEventsActivityIntent)
+    }
 
-        fun onFavoriteClick(eventData: EventApiData) {
-            upcomingEventsViewModule.onFavoriteClick(eventData)
+    fun onFavoriteClick(eventData: EventApiData) {
+        upcomingEventsViewModule.onFavoriteClick(eventData)
 
-            Toast.makeText(
+        Toast.makeText(
                 this@UpcomingEventsActivity,
                 "нажато сердечко", Toast.LENGTH_SHORT
-            ).show()
-        }
+        ).show()
+    }
 
-    private fun handleProgressBarState(progressState: ProgressState)
-    {
+    private fun handleProgressBarState(progressState: ProgressState) {
         progressBar.isVisible = progressState is ProgressState.Loading
     }
 }

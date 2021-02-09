@@ -10,8 +10,8 @@ import org.koin.dsl.module
 val favoriteEventsModule: org.koin.core.module.Module = module {
     viewModel {
         FavoritesViewModel(
-            favoritesRepository = get(),
-            notificationAlarmHelper = get()
+                favoritesRepository = get(),
+                notificationAlarmHelper = get()
         )
     }
     single {

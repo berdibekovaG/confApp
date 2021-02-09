@@ -8,12 +8,11 @@ import kz.kolesateam.confapp.R
 import kz.kolesateam.confapp.events.data.models.BranchApiData
 import kz.kolesateam.confapp.events.data.models.EventApiData
 import kz.kolesateam.confapp.events.data.models.UpcomingEventListItem
-import kz.kolesateam.confapp.events.presentation.UpcomingClickListener
 
 class BranchAdapter(
-    private val eventClick: (branchId: BranchApiData) ->Unit,
-    private val eventCardClick: (event: EventApiData) ->Unit,
-    private val favoriteImageViewClick: (eventApiData: EventApiData) -> Unit
+        private val eventClick: (branchId: BranchApiData) -> Unit,
+        private val eventCardClick: (event: EventApiData) -> Unit,
+        private val favoriteImageViewClick: (eventApiData: EventApiData) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val dataList: MutableList<UpcomingEventListItem> = mutableListOf()
@@ -21,15 +20,15 @@ class BranchAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             1 -> HeadVIewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.header_layout, parent, false)
+                    LayoutInflater.from(parent.context)
+                            .inflate(R.layout.header_layout, parent, false)
             )
             else ->
                 BranchViewHolder(
-                    View.inflate(parent.context, R.layout.branch_item, null),
-                    eventClick = eventClick,
-                    eventCardClick = eventCardClick,
-                    favoriteImageViewClick = favoriteImageViewClick
+                        View.inflate(parent.context, R.layout.branch_item, null),
+                        eventClick = eventClick,
+                        eventCardClick = eventCardClick,
+                        favoriteImageViewClick = favoriteImageViewClick
                 )
         }
     }

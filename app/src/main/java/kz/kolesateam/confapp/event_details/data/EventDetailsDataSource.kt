@@ -5,7 +5,8 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface EventDetailsDataSource {
+interface
+EventDetailsDataSource {
     @GET("/events/{event_id}")
     //SpeakerApiData -> EventApiData
     //Call<List<EventApiData>> -> Call<EventApiData>

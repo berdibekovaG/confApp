@@ -28,9 +28,9 @@ class AllEventsActivity : AppCompatActivity() {
     private val allEventsViewModel: AllEventsViewModel by viewModel()
 
     private val allEventsBranchAdapter: AllEventsBranchAdapter = AllEventsBranchAdapter(
-        ::onEventClick,
-        ::onEventCardClick,
-        ::onFavoriteClick
+            ::onEventClick,
+            ::onEventCardClick,
+            ::onFavoriteClick
     )
 
     private lateinit var progressBar: ProgressBar
@@ -43,7 +43,6 @@ class AllEventsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_all_events)
         AndroidThreeTen.init(this)
         bindViews()
-
         //val branchId: Int = intent.getIntExtra("branch_id", 0)
     }
 
@@ -53,7 +52,7 @@ class AllEventsActivity : AppCompatActivity() {
         buttonBack = findViewById(R.id.buttonBack)
         favoriteButton = findViewById(R.id.events_button_favorites)
 
-        favoriteButton.setOnClickListener{
+        favoriteButton.setOnClickListener {
             val favoriteEventsListActivityIntent = Intent(this, FavoriteEventsActivity::class.java)
             startActivity(favoriteEventsListActivityIntent)
         }
@@ -68,7 +67,7 @@ class AllEventsActivity : AppCompatActivity() {
 
 
     private fun goBackToUpcomingEventsActivity() {
-        buttonBack.setOnClickListener{
+        buttonBack.setOnClickListener {
             val upcomingEventsActivityIntent = Intent(this, UpcomingEventsActivity::class.java)
             startActivity(upcomingEventsActivityIntent)
         }
@@ -87,32 +86,35 @@ class AllEventsActivity : AppCompatActivity() {
     }
 
 
-    private fun showResult(upcomingEventList: List<UpcomingEventListItem>){
+    private fun showResult(upcomingEventList: List<UpcomingEventListItem>) {
         allEventsBranchAdapter.setList(upcomingEventList)
     }
-    private fun showError(errorMessage: Exception){
+
+    private fun showError(errorMessage: Exception) {
         Toast.makeText(this, errorMessage.localizedMessage, Toast.LENGTH_SHORT).show()
     }
+
     private fun onEventCardClick(
-        event: EventApiData
-    ){
-        startActivity(
-            EventDetailsRouter()
-                .createIntent(this, event.id!!))
-    }
-    private fun onEventClick(
-        eventTitle: Int
+            event: EventApiData
     ) {
-        Toast.makeText(
-            this, "Event: $eventTitle", Toast.LENGTH_SHORT
-        ).show()
-    }
-    private fun onFavoriteClick(
-        eventApiData: EventApiData
-    ){
-        allEventsViewModel.onFavoriteClick(eventApiData)
+        startActivity(
+                EventDetailsRouter()
+                        .createIntent(this, event.id!!))
     }
 
+    private fun onEventClick(
+            eventTitle: Int
+    ) {
+        Toast.makeText(
+                this, "Event: $eventTitle", Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun onFavoriteClick(
+            eventApiData: EventApiData
+    ) {
+        allEventsViewModel.onFavoriteClick(eventApiData)
+    }
 }
 
 

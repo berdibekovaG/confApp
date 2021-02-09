@@ -27,4 +27,21 @@
     <dimen name="btn_154dp">154dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="ic_size_24dp">24dp</dimen>
+    <dimen name="radius_corner_45dp">45dp</dimen>
+    <dimen name="minHeight_800dp">800dp</dimen>
+    <dimen name="margin_size_26dp">26dp</dimen>
+    <dimen name="layout_24dp">24dp</dimen>
+    <dimen name="layout_0dp">0dp</dimen>
+    <dimen name="margin_95dp">95dp</dimen>
+    <dimen name="layout_330dp">330dp</dimen>
+    <dimen name="textview_18sp">18sp</dimen>
+    <dimen name="layout_2dp">2dp</dimen>
+    <dimen name="layout_240dp">240dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="layout_163dp">163dp</dimen>
+    <dimen name="margin_37dp">37dp</dimen>
+    <dimen name="margin_60dp">60dp</dimen>
+    <dimen name="padding_90dp">90dp</dimen>
+    <dimen name="margin_27dp">27dp</dimen>
+    <dimen name="layout_280dp">280dp</dimen>
 </resources>

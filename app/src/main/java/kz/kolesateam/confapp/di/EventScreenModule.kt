@@ -19,18 +19,18 @@ val eventScreenModule: Module = module {
 
     viewModel {
         UpcomingEventsViewModel(
-            upcomingEventsRepository = get(),
-            userNameDataSource = get(named(MEMORY_DATA_SOURCE)),
+                upcomingEventsRepository = get(),
+                userNameDataSource = get(named(MEMORY_DATA_SOURCE)),
                 favoriteEventsRepository = get(),
-        notificationAlarmHelper = get()
+                notificationAlarmHelper = get()
         )
     }
 
     single {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(JacksonConverterFactory.create())
-            .build()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build()
     }
 
     single {
@@ -41,10 +41,10 @@ val eventScreenModule: Module = module {
 
     viewModel {
         AllEventsViewModel(
-            allEventsRepository = get(),
-            branchIdDataSource = get(),
-            favoritesRepository = get(),
-            notificationAlarmHelper = get()
+                allEventsRepository = get(),
+                branchIdDataSource = get(),
+                favoritesRepository = get(),
+                notificationAlarmHelper = get()
         )
     }
     single {
@@ -54,13 +54,13 @@ val eventScreenModule: Module = module {
 
     factory() {
         DefaultUpcomingEventsRepository(
-            upcomingEventsDataSource = get()
+                upcomingEventsDataSource = get()
         ) as UpcomingEventsRepository
     }
 
     factory {
         DefaultAllEventsRepository(
-            upcomingAllEventsDataSource = get()
+                upcomingAllEventsDataSource = get()
         ) as AllEventsActivityRepository
     }
 }
