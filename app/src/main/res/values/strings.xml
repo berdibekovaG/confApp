@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">ConfApp</string>
+    <string name="what_is_name">Как тебя зовут?</string>
+    <string name="enter_your_name">Введите ваше имя</string>
+    <string name="continue_btn">Продолжить</string>
+    <string name="hello_user_fmt">Hello %1s </string>
+    <string name="events_sync_loading">Sync  loading</string>
+    <string name="events_async_loading">Async loading</string>
+    <string name="chosen">В избранное</string>
+    <string name="branch_title">Branch title</string>
+    <string name="event_state">Следующий доклад</string>
+    <string name="time">time</string>
+    <string name="name_of_speaker">Name of speaker</string>
+    <string name="speakers_job">Speakers job</string>
+    <string name="header_tools_text">Привет, Васян</string>
+    <string name="title">title</string>
+    <string name="title_activity_favorite_events">FavoriteEventsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="event_details_speaker">event detail speaker</string>
+    <string name="name_of_speake">speakers name</string>
+    <string name="upcoming_events_card_ex3">speakers job</string>
+    <string name="upcoming_events_card_ex1">time and place</string>
+    <string name="upcoming_events_card_ex4">event details title</string>
+    <string name="fav_btn_to_favorites">в избранное</string>
+    <string name="favorite_events_list_quite">здесь пока тихо...</string>
+    <string name="fav_events_to_main">на главную</string>
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="FavoriteButton">
+        <item name="android:layout_width">154dp</item>
+        <item name= "android:layout_height">wrap_content</item>
+        <item name= "android:layout_gravity">center|bottom</item>
+        <item name= "android:layout_marginBottom">@dimen/margin_size_16dp</item>
+        <item name= "android:background">@drawable/bg_to_favorite_button</item>
+        <item name= "android:drawableLeft">@drawable/ic_favorite_border</item>
+        <item name= "android:drawablePadding">@dimen/padding_4dp</item>
+        <item name= "android:padding">@dimen/bnt_padding_8dp</item>
+        <item name=  "android:text">@string/chosen</item>
+        <item name= "android:textAllCaps">false</item>
+        <item name=  "android:textColor">#2A81DD</item>
+    </style>
+</resources>

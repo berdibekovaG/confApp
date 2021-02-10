@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Button
+        android:id="@+id/events_button_favorites"
+        android:layout_width="@dimen/layout_163dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button"
+        android:drawableLeft="@drawable/ic_favorite_border_blue"
+        android:drawablePadding="@dimen/padding_4dp"
+        android:padding="@dimen/bnt_padding_8dp"
+        android:text="@string/fav_btn_to_favorites"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color_blue"
+        android:textSize="@dimen/btn_textsize_16sp"
+        app:backgroundTint="@color/white"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_margin="@dimen/margin_size_16dp"/>
+
+</FrameLayout>

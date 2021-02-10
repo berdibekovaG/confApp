@@ -3,4 +3,27 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey_for_bg_field">#331C1819</color>
+    <color name="grey_btn_disabled_solid">#1A1C1819</color>
+    <color name="grey_btn_disabled_stroke">#331C1819</color>
+    <color name="blue_btn_enabled">#2A81DD</color>
+    <color name="activity_hello_textview_color_grey">#1C1819</color>
+    <color name="activity_upcome_events_sync_text">#2196F3</color>
+    <color name="activity_upcome_events_async_text">#4CAF50</color>
+    <color name="activity_upcome_events_fail_text">#F44336</color>
+    <color name="app_primary_blue_color">#2A81DD</color>
+    <color name="textview_text_black">#1C1819</color>
+    <color name="textview_dataplace_text_grey">#888B94</color>
+    <color name="textview_event_text_white">#FAFAFA</color>
+    <color name="textview_title_text_black">#1C1819</color>
+    <color name="textview_textcolor_grey">#888B94</color>
+    <color name="branch_item_title_white">#FFFFFF</color>
+    <color name="text_color_blue">#2A81DD</color>
+    <color name="img_btn_dark_blue">#051021</color>
+    <color name="textview_white">#FAFAFA</color>
+
 </resources>

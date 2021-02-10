@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/img_btn_dark_blue">
+    <TextView
+        android:id="@+id/AllUpcomingEventsActivity_header_branch_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/acthello_texview_testsize_24sp"
+        android:text="Android"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_size_16dp"/>
+</LinearLayout>
